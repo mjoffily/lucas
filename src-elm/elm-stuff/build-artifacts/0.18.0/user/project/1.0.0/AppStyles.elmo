@@ -1,0 +1,629 @@
+var _user$project$AppStyles$css = function (_p0) {
+	return _rtfeldman$elm_css$Css$stylesheet(
+		A2(_rtfeldman$elm_css$Css_Namespace$namespace, _user$project$StyleTypes$cssNameSpace.name, _p0));
+}(
+	{
+		ctor: '::',
+		_0: A2(
+			_rtfeldman$elm_css$Css$selector,
+			'html',
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$fontFamily(_rtfeldman$elm_css$Css$sansSerif),
+				_1: {
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$height(
+						_rtfeldman$elm_css$Css$pct(100)),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_rtfeldman$elm_css$Css$selector,
+				'h1',
+				{
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$fontSize(
+						_rtfeldman$elm_css$Css$em(2)),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_rtfeldman$elm_css$Css$selector,
+					'[class*=Col]',
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$padding(
+								_rtfeldman$elm_css$Css$px(15)),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_rtfeldman$elm_css$Css$selector,
+						'*',
+						{
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$boxSizing(_rtfeldman$elm_css$Css$borderBox),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_rtfeldman$elm_css$Css$class,
+							_user$project$StyleTypes$FormLine,
+							{
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$marginBottom(
+									_rtfeldman$elm_css$Css$em(1)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_rtfeldman$elm_css$Css$class,
+								_user$project$StyleTypes$Error,
+								{
+									ctor: '::',
+									_0: _rtfeldman$elm_css$Css$color(_rtfeldman$elm_css$Css_Colors$red),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_rtfeldman$elm_css$Css$class,
+									_user$project$StyleTypes$SourceCountry,
+									{
+										ctor: '::',
+										_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
+										_1: {
+											ctor: '::',
+											_0: _rtfeldman$elm_css$Css$backgroundColor(
+												_rtfeldman$elm_css$Css$hex('#F0F0F0')),
+											_1: {
+												ctor: '::',
+												_0: _rtfeldman$elm_css$Css$width(
+													_rtfeldman$elm_css$Css$pct(45)),
+												_1: {
+													ctor: '::',
+													_0: _rtfeldman$elm_css$Css$padding(
+														_rtfeldman$elm_css$Css$px(20)),
+													_1: {
+														ctor: '::',
+														_0: _rtfeldman$elm_css$Css$height(
+															_rtfeldman$elm_css$Css$px(217)),
+														_1: {
+															ctor: '::',
+															_0: _rtfeldman$elm_css$Css$marginTop(
+																_rtfeldman$elm_css$Css$px(50)),
+															_1: {
+																ctor: '::',
+																_0: _rtfeldman$elm_css$Css$margin(
+																	_rtfeldman$elm_css$Css$px(12)),
+																_1: {
+																	ctor: '::',
+																	_0: _rtfeldman$elm_css$Css$color(
+																		A3(_rtfeldman$elm_css$Css$rgb, 0, 0, 0)),
+																	_1: {
+																		ctor: '::',
+																		_0: A3(
+																			_rtfeldman$elm_css$Css$border3,
+																			_rtfeldman$elm_css$Css$px(0.2),
+																			_rtfeldman$elm_css$Css$solid,
+																			_rtfeldman$elm_css$Css$hex('#DEB887')),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_rtfeldman$elm_css$Css$class,
+										_user$project$StyleTypes$TargetCountry,
+										{
+											ctor: '::',
+											_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$right),
+											_1: {
+												ctor: '::',
+												_0: _rtfeldman$elm_css$Css$backgroundColor(
+													_rtfeldman$elm_css$Css$hex('#F0F0F0')),
+												_1: {
+													ctor: '::',
+													_0: _rtfeldman$elm_css$Css$width(
+														_rtfeldman$elm_css$Css$pct(45)),
+													_1: {
+														ctor: '::',
+														_0: _rtfeldman$elm_css$Css$padding(
+															_rtfeldman$elm_css$Css$px(20)),
+														_1: {
+															ctor: '::',
+															_0: _rtfeldman$elm_css$Css$height(
+																_rtfeldman$elm_css$Css$px(217)),
+															_1: {
+																ctor: '::',
+																_0: _rtfeldman$elm_css$Css$marginTop(
+																	_rtfeldman$elm_css$Css$px(50)),
+																_1: {
+																	ctor: '::',
+																	_0: _rtfeldman$elm_css$Css$margin(
+																		_rtfeldman$elm_css$Css$px(12)),
+																	_1: {
+																		ctor: '::',
+																		_0: _rtfeldman$elm_css$Css$color(
+																			A3(_rtfeldman$elm_css$Css$rgb, 0, 0, 0)),
+																		_1: {
+																			ctor: '::',
+																			_0: A3(
+																				_rtfeldman$elm_css$Css$border3,
+																				_rtfeldman$elm_css$Css$px(0.2),
+																				_rtfeldman$elm_css$Css$solid,
+																				_rtfeldman$elm_css$Css$hex('#DEB887')),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_rtfeldman$elm_css$Css$class,
+											_user$project$StyleTypes$Button,
+											{
+												ctor: '::',
+												_0: _rtfeldman$elm_css$Css$backgroundColor(
+													_rtfeldman$elm_css$Css$hex('#4CAF50')),
+												_1: {
+													ctor: '::',
+													_0: A3(
+														_rtfeldman$elm_css$Css$border3,
+														_rtfeldman$elm_css$Css$px(0.2),
+														_rtfeldman$elm_css$Css$solid,
+														_rtfeldman$elm_css$Css_Colors$black),
+													_1: {
+														ctor: '::',
+														_0: _rtfeldman$elm_css$Css$color(_rtfeldman$elm_css$Css_Colors$white),
+														_1: {
+															ctor: '::',
+															_0: _rtfeldman$elm_css$Css$padding(
+																_rtfeldman$elm_css$Css$px(10)),
+															_1: {
+																ctor: '::',
+																_0: _rtfeldman$elm_css$Css$textAlign(_rtfeldman$elm_css$Css$center),
+																_1: {
+																	ctor: '::',
+																	_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$inlineBlock),
+																	_1: {
+																		ctor: '::',
+																		_0: _rtfeldman$elm_css$Css$fontSize(
+																			_rtfeldman$elm_css$Css$px(12)),
+																		_1: {
+																			ctor: '::',
+																			_0: _rtfeldman$elm_css$Css$margin(
+																				_rtfeldman$elm_css$Css$px(4)),
+																			_1: {
+																				ctor: '::',
+																				_0: _rtfeldman$elm_css$Css$cursor(_rtfeldman$elm_css$Css$pointer),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_rtfeldman$elm_css$Css$id,
+												_user$project$StyleTypes$Ads,
+												{
+													ctor: '::',
+													_0: _rtfeldman$elm_css$Css$padding(
+														_rtfeldman$elm_css$Css$px(10)),
+													_1: {
+														ctor: '::',
+														_0: A3(
+															_rtfeldman$elm_css$Css$border3,
+															_rtfeldman$elm_css$Css$px(2),
+															_rtfeldman$elm_css$Css$dashed,
+															_rtfeldman$elm_css$Css_Colors$green),
+														_1: {
+															ctor: '::',
+															_0: _rtfeldman$elm_css$Css$height(
+																_rtfeldman$elm_css$Css$pct(80)),
+															_1: {
+																ctor: '::',
+																_0: _rtfeldman$elm_css$Css$margin(
+																	_rtfeldman$elm_css$Css$pct(15)),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_rtfeldman$elm_css$Css$class,
+													_user$project$StyleTypes$Footer,
+													{
+														ctor: '::',
+														_0: _rtfeldman$elm_css$Css$backgroundColor(
+															_rtfeldman$elm_css$Css$hex('#0099cc')),
+														_1: {
+															ctor: '::',
+															_0: _rtfeldman$elm_css$Css$color(
+																_rtfeldman$elm_css$Css$hex('#ffffff')),
+															_1: {
+																ctor: '::',
+																_0: _rtfeldman$elm_css$Css$textAlign(_rtfeldman$elm_css$Css$center),
+																_1: {
+																	ctor: '::',
+																	_0: _rtfeldman$elm_css$Css$fontSize(
+																		_rtfeldman$elm_css$Css$px(12)),
+																	_1: {
+																		ctor: '::',
+																		_0: _rtfeldman$elm_css$Css$padding(
+																			_rtfeldman$elm_css$Css$px(15)),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_rtfeldman$elm_css$Css$class,
+														_user$project$StyleTypes$Row,
+														{
+															ctor: '::',
+															_0: _rtfeldman$elm_css$Css$height(
+																_rtfeldman$elm_css$Css$vh(80)),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_rtfeldman$elm_css$Css$class,
+															_rtfeldman$elm_css$Css_Elements$aside,
+															{
+																ctor: '::',
+																_0: _rtfeldman$elm_css$Css$padding(
+																	_rtfeldman$elm_css$Css$px(15)),
+																_1: {
+																	ctor: '::',
+																	_0: _rtfeldman$elm_css$Css$margin(
+																		_rtfeldman$elm_css$Css$px(15)),
+																	_1: {
+																		ctor: '::',
+																		_0: _rtfeldman$elm_css$Css$height(
+																			_rtfeldman$elm_css$Css$pct(100)),
+																		_1: {
+																			ctor: '::',
+																			_0: _rtfeldman$elm_css$Css$color(
+																				_rtfeldman$elm_css$Css$hex('#ffffff')),
+																			_1: {
+																				ctor: '::',
+																				_0: _rtfeldman$elm_css$Css$textAlign(_rtfeldman$elm_css$Css$center),
+																				_1: {
+																					ctor: '::',
+																					_0: _rtfeldman$elm_css$Css$fontSize(
+																						_rtfeldman$elm_css$Css$px(14)),
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		}
+																	}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_rtfeldman$elm_css$Css$class,
+																_user$project$StyleTypes$Col1,
+																{
+																	ctor: '::',
+																	_0: _rtfeldman$elm_css$Css$width(
+																		_rtfeldman$elm_css$Css$pct(8.33)),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_rtfeldman$elm_css$Css$class,
+																	_user$project$StyleTypes$Col2,
+																	{
+																		ctor: '::',
+																		_0: _rtfeldman$elm_css$Css$width(
+																			_rtfeldman$elm_css$Css$pct(16.33)),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_rtfeldman$elm_css$Css$class,
+																		_user$project$StyleTypes$Col3,
+																		{
+																			ctor: '::',
+																			_0: _rtfeldman$elm_css$Css$width(
+																				_rtfeldman$elm_css$Css$pct(25)),
+																			_1: {
+																				ctor: '::',
+																				_0: _rtfeldman$elm_css$Css$children(
+																					{
+																						ctor: '::',
+																						_0: A2(
+																							_rtfeldman$elm_css$Css$class,
+																							_user$project$StyleTypes$Right,
+																							{
+																								ctor: '::',
+																								_0: _rtfeldman$elm_css$Css$height(
+																									_rtfeldman$elm_css$Css$pct(100)),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_rtfeldman$elm_css$Css$class,
+																			_user$project$StyleTypes$Col4,
+																			{
+																				ctor: '::',
+																				_0: _rtfeldman$elm_css$Css$width(
+																					_rtfeldman$elm_css$Css$pct(33.33)),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_rtfeldman$elm_css$Css$class,
+																				_user$project$StyleTypes$Col5,
+																				{
+																					ctor: '::',
+																					_0: _rtfeldman$elm_css$Css$width(
+																						_rtfeldman$elm_css$Css$pct(41.66)),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_rtfeldman$elm_css$Css$class,
+																					_user$project$StyleTypes$Col6,
+																					{
+																						ctor: '::',
+																						_0: _rtfeldman$elm_css$Css$width(
+																							_rtfeldman$elm_css$Css$pct(50)),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_rtfeldman$elm_css$Css$class,
+																						_user$project$StyleTypes$Col7,
+																						{
+																							ctor: '::',
+																							_0: _rtfeldman$elm_css$Css$width(
+																								_rtfeldman$elm_css$Css$pct(58.33)),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_rtfeldman$elm_css$Css$class,
+																							_user$project$StyleTypes$Col8,
+																							{
+																								ctor: '::',
+																								_0: _rtfeldman$elm_css$Css$width(
+																									_rtfeldman$elm_css$Css$pct(66.66)),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_rtfeldman$elm_css$Css$class,
+																								_user$project$StyleTypes$Col9,
+																								{
+																									ctor: '::',
+																									_0: _rtfeldman$elm_css$Css$width(
+																										_rtfeldman$elm_css$Css$pct(75)),
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(
+																									_rtfeldman$elm_css$Css$class,
+																									_user$project$StyleTypes$Col10,
+																									{
+																										ctor: '::',
+																										_0: _rtfeldman$elm_css$Css$width(
+																											_rtfeldman$elm_css$Css$pct(83.33)),
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_rtfeldman$elm_css$Css$class,
+																										_user$project$StyleTypes$Col11,
+																										{
+																											ctor: '::',
+																											_0: _rtfeldman$elm_css$Css$width(
+																												_rtfeldman$elm_css$Css$pct(91.66)),
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {
+																										ctor: '::',
+																										_0: A2(
+																											_rtfeldman$elm_css$Css$class,
+																											_user$project$StyleTypes$Col12,
+																											{
+																												ctor: '::',
+																												_0: _rtfeldman$elm_css$Css$width(
+																													_rtfeldman$elm_css$Css$pct(100)),
+																												_1: {ctor: '[]'}
+																											}),
+																										_1: {
+																											ctor: '::',
+																											_0: A2(
+																												_rtfeldman$elm_css$Css$class,
+																												_user$project$StyleTypes$BottomResult,
+																												{
+																													ctor: '::',
+																													_0: A2(
+																														_rtfeldman$elm_css$Css$border2,
+																														_rtfeldman$elm_css$Css$px(1),
+																														_rtfeldman$elm_css$Css$solid),
+																													_1: {
+																														ctor: '::',
+																														_0: _rtfeldman$elm_css$Css$borderColor(
+																															_rtfeldman$elm_css$Css$hex('#DADAA9')),
+																														_1: {
+																															ctor: '::',
+																															_0: _rtfeldman$elm_css$Css$fontSize(
+																																_rtfeldman$elm_css$Css$em(0.5)),
+																															_1: {
+																																ctor: '::',
+																																_0: _rtfeldman$elm_css$Css$backgroundColor(
+																																	_rtfeldman$elm_css$Css$hex('#fff5ee')),
+																																_1: {
+																																	ctor: '::',
+																																	_0: _rtfeldman$elm_css$Css$padding(
+																																		_rtfeldman$elm_css$Css$px(20)),
+																																	_1: {ctor: '[]'}
+																																}
+																															}
+																														}
+																													}
+																												}),
+																											_1: {
+																												ctor: '::',
+																												_0: A2(
+																													_rtfeldman$elm_css$Css$class,
+																													_user$project$StyleTypes$Rowgrid,
+																													{
+																														ctor: '::',
+																														_0: _rtfeldman$elm_css$Css$width(
+																															_rtfeldman$elm_css$Css$pct(100)),
+																														_1: {
+																															ctor: '::',
+																															_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$table),
+																															_1: {
+																																ctor: '::',
+																																_0: A2(_rtfeldman$elm_css$Css$property, 'table-layout', 'fixed'),
+																																_1: {
+																																	ctor: '::',
+																																	_0: _rtfeldman$elm_css$Css$padding(
+																																		_rtfeldman$elm_css$Css$px(2)),
+																																	_1: {ctor: '[]'}
+																																}
+																															}
+																														}
+																													}),
+																												_1: {
+																													ctor: '::',
+																													_0: A2(
+																														_rtfeldman$elm_css$Css$class,
+																														_user$project$StyleTypes$CRol,
+																														{
+																															ctor: '::',
+																															_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$tableCell),
+																															_1: {ctor: '[]'}
+																														}),
+																													_1: {
+																														ctor: '::',
+																														_0: A2(
+																															_rtfeldman$elm_css$Css$class,
+																															_user$project$StyleTypes$Result,
+																															{
+																																ctor: '::',
+																																_0: _rtfeldman$elm_css$Css$margin(
+																																	_rtfeldman$elm_css$Css$px(37)),
+																																_1: {
+																																	ctor: '::',
+																																	_0: _rtfeldman$elm_css$Css$backgroundColor(
+																																		_rtfeldman$elm_css$Css$hex('#dadad2')),
+																																	_1: {
+																																		ctor: '::',
+																																		_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$block),
+																																		_1: {
+																																			ctor: '::',
+																																			_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
+																																			_1: {
+																																				ctor: '::',
+																																				_0: A2(
+																																					_rtfeldman$elm_css$Css$border2,
+																																					_rtfeldman$elm_css$Css$px(1),
+																																					_rtfeldman$elm_css$Css$solid),
+																																				_1: {
+																																					ctor: '::',
+																																					_0: _rtfeldman$elm_css$Css$borderColor(
+																																						_rtfeldman$elm_css$Css$hex('#DADAA9')),
+																																					_1: {
+																																						ctor: '::',
+																																						_0: _rtfeldman$elm_css$Css$fontSize(
+																																							_rtfeldman$elm_css$Css$em(1.5)),
+																																						_1: {
+																																							ctor: '::',
+																																							_0: _rtfeldman$elm_css$Css$padding(
+																																								_rtfeldman$elm_css$Css$px(10)),
+																																							_1: {ctor: '[]'}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}),
+																														_1: {ctor: '[]'}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});

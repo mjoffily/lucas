@@ -21,6 +21,7 @@ app.use('/api', api);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
+    console.log("here");
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
@@ -38,4 +39,6 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`API running on localhost:${port}`));
+server.listen(port, () => console.log(`APII running on localhost:${port}`));
+
+module.exports = app;

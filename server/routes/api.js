@@ -3,43 +3,30 @@
 const express = require('express');
 // declare axios for making http requests
 const axios = require('axios');
-var Promise = require('bluebird');
-var google = require('../../node_modules/googleapis/lib/googleapis.js');
+var utils = require('./api.utils');
+var exchanges = require('./api.exchanges');
+
 
 const router = express.Router();
 
 const COUNTRIES = {'Australia': {'country': 'Australia', 'currencySymbol': 'AUD', 'name': 'Australian Dolar', 'exchanges':[
-                     {name: 'Independente Reserve', method: exchgIndependentReserve}]},
+                     'Independent Reserve']},
                    'Brazil': {'country':'Brazil', 'currencySymbol':'BRL', 'name': 'Brazilian Real', 'exchanges':[
-                     {name: 'Foxbit', method: exchgFoxBit}, 
-                     {name: 'BitcoinToYou', method: exchgBitcoinToYou}, 
-                     {name: 'Mercado Bitcoin', method: exchgMercadoBitcoin}, 
-                     {name: 'CoinBR', method: exchgIndependentReserve}]},
-                   'Chile': {'country':'Chile', 'currencySymbol':'CLP', 'name': 'Chilean Peso', 'exchanges':[{'name': 'ChileBit.NET'}]},
-                   'Pakistan': {'country':'Pakistan', 'currencySymbol':'PKR', 'name': 'Pakistani Rupee', 'exchanges':[{'name': 'UrduBit'}]},
-                   'Philippines': {'country':'Philippines', 'currencySymbol': 'PHP', 'name': 'Philipino Peso', 'exchanges':[{'name': 'Coins.ph', method: exchgCoinsPH}]},
-                   'Russia': {'country':'Russia', 'currencySymbol':'RUB', 'name': 'Russian Ruble', 'exchanges':[{'name': 'BTC-e', method: exchgBTCe}]},
-                   'South Africa': {'country':'South Africa', 'currencySymbol':'ZAR', 'name': 'South African Rand', 'exchanges':[{'name': 'luno', method: exchgLunoZAR}]},
-                   'Thailand': {'country':'Thailand', 'currencySymbol':'THB', 'name': 'Thailand Baht', 'exchanges':[{'name': 'Coins.ph (THB)', method: exchgCoinsTHB}]},
-                   'United States': {'country':'United States', 'currencySymbol':'USD', 'name': 'American dolar', 'exchanges':[{'name': 'Coinbase', method: exchgCoinbaseUSD}]},
-                   'Venezuela': {'country':'Venezuela', 'currencySymbol':'VEF', 'name': 'Venezuelan Bolivar', 'exchanges':[{'name': 'SurBitcoin'}]},
-                   'Vietnam': {'country':'Vietnam', 'currencySymbol':'VND', 'name': 'Vietnamise Dongs', 'exchanges':[{'name': 'VBTC'}]}
+                     'Foxbit', 
+                     'BitcoinToYou', 
+                     'Mercado Bitcoin', 
+                     'CoinBR']},
+                   'Chile': {'country':'Chile', 'currencySymbol':'CLP', 'name': 'Chilean Peso', 'exchanges':['ChileBit.NET']},
+                   'Pakistan': {'country':'Pakistan', 'currencySymbol':'PKR', 'name': 'Pakistani Rupee', 'exchanges':['UrduBit']},
+                   'Philippines': {'country':'Philippines', 'currencySymbol': 'PHP', 'name': 'Philipino Peso', 'exchanges':['Coins.ph']},
+                   'Russia': {'country':'Russia', 'currencySymbol':'RUB', 'name': 'Russian Ruble', 'exchanges':['BTC-e']},
+                   'South Africa': {'country':'South Africa', 'currencySymbol':'ZAR', 'name': 'South African Rand', 'exchanges':['luno']},
+                   'Thailand': {'country':'Thailand', 'currencySymbol':'THB', 'name': 'Thailand Baht', 'exchanges':['Coins.ph (THB)']},
+                   'United States': {'country':'United States', 'currencySymbol':'USD', 'name': 'American dolar', 'exchanges':['Coinbase']},
+                   'Venezuela': {'country':'Venezuela', 'currencySymbol':'VEF', 'name': 'Venezuelan Bolivar', 'exchanges':['SurBitcoin']},
+                   'Vietnam': {'country':'Vietnam', 'currencySymbol':'VND', 'name': 'Vietnamise Dongs', 'exchanges':['VBTC']}
                 };
 
-const EXCHANGES = { "Foxbit": exchgFoxBit
-                  , "BitcoinToYou": exchgBitcoinToYou
-                  , "Mercado Bitcoin": exchgMercadoBitcoin
-                  , "Independente Reserve": exchgIndependentReserve
-                  , "SurBitcoin": exchgSurBitcoin
-                  , "ChileBit.NET": exchgChileBit
-                  , "Coins.ph": exchgCoinsPH
-                  , "Coins.ph (THB)": exchgCoinsTHB
-                  , "Coinbase": exchgCoinbaseUSD
-                  , "luno": exchgLunoZAR
-                  , "UrduBit": exchgUrduBitPKR
-                  , "VBTC": exchgVBTC
-                  }
-                        
 //const API = 'https://jsonplaceholder.typicode.com';
 const API = 'https://angular2test-mjoffily.c9users.io:8080';
 /* GET api listing. */
@@ -55,6 +42,8 @@ function findExchange(arr, name) {
 }
 //var fs = Promise.promisifyAll(require('fs'));
 
+
+
 function isSupportedCountry(country, callback) {
 
   if (COUNTRIES[country]) {
@@ -64,61 +53,44 @@ function isSupportedCountry(country, callback) {
   }   
 }
 
+
+
 function getExchangeRate(sourceCountry, targetCountry, callback) {
-  
-  isSupportedCountry(sourceCountry, (err, supported) => {
-    if (!supported) {
-      console.log('Error: country not supported ' + sourceCountry);
-      callback(new Error('source country not supported '), null);
-      return;
-    } else {
-      isSupportedCountry(targetCountry, (err, supported) => {
-        if (!supported) {
-          callback(new Error('target country not supported '), null);
-          return;
-        } else {
-          var customsearch = google.customsearch('v1');
-          var queryString = '1+' + COUNTRIES[sourceCountry].currencySymbol + '+to+' + COUNTRIES[targetCountry].currencySymbol
-          var currencyPair = COUNTRIES[sourceCountry].currencySymbol + COUNTRIES[targetCountry].currencySymbol
-          
-          // You can get a custom search engine id at
-          // https://www.google.com/cse/create/new
-          const CX = '004065446796459763735:mlqrh0wzros';
-          const API_KEY = 'AIzaSyBoq2eKA4tUmVXztAkT0m1Uu6YR5BC22yE';
-          const SEARCH = queryString;
-          
-          customsearch.cse.list({ cx: CX, q: SEARCH, auth: API_KEY }, function (err, resp) {
-            if (err) {
-              callback(new Error(err), null);
-              return;
-            } else {
-              console.log(resp.items.length)
-              for (let item of resp.items) {
-                
-                if (!item.pagemap) {
-                  continue;
-                }
-                if (!item.pagemap.financialquote) {
-                  continue;
-                }
-                
-                var curPair = item['pagemap']['financialquote'][0]['name']
-                console.log('Testing current pair ' + curPair);
-                if (curPair === currencyPair) {
-                  var rate = item['pagemap']['financialquote'][0]['price'];
-                  console.log('rate: ' + rate);
-                  callback(null, rate);
-                  return;
-                }
-              }
-            }
-            callback(new Error("could not find exchange rate for " + currencyPair), null);
-          });
-        }
-      });    
-    }
+  return new Promise(function (resolve, reject) {  
+  // Check if the source country is supported
+    isSupportedCountry(sourceCountry, (err, supported) => {
+      if (!supported) {
+        console.log('Error: country not supported ' + sourceCountry);
+        reject(new Error('source country not supported '));
+      } else {
+      // Check if the target country is supported
+        isSupportedCountry(targetCountry, (err, supported) => {
+          if (!supported) {
+            reject(new Error('target country not supported '));
+          } else {
+            utils.getExchangeRateLocal(COUNTRIES[sourceCountry].currencySymbol, COUNTRIES[targetCountry].currencySymbol)
+            .then(function(exchangeRate) {
+              console.log("getExchangeRate - Resolving - Rate: " + JSON.stringify(exchangeRate, null, 2));
+              resolve(exchangeRate);
+            })
+            .catch(function(err) {
+              reject(err);
+            })
+          }
+        });    
+      }
+    });
   });
 }
+
+utils.getExchangeRateLocal("USD", "BRL");
+////var isSupportedCountryAsync = Promise.promisify(isSupportedCountry);
+// var getExchangeRateAsync = Promise.promisify(getExchangeRate);
+// getExchangeRateAsync("Australia", "Brazil").then(function(result) {
+//   console.log("this is the resulttt: " + result);
+// }).catch(function(err) {
+//   console.error("This is the error: " + err);
+// });
 
 router.get('/xr', (req, res) => {
   
@@ -178,38 +150,38 @@ router.get('/countries', (req, res) => {
     
 });
 
-function exchgIndependentReserve(callback) {
-  var uri = 'https://api.independentreserve.com/Public/GetMarketSummary?primaryCurrencyCode=xbt&secondaryCurrencyCode=aud';
-  axios.get(uri).then(ir => {
-          console.log(ir.data);
-          callback(null, {'currentHighestBidPrice': ir.data.CurrentHighestBidPrice, 'currentLowestOfferPrice': ir.data.CurrentLowestOfferPrice});
-        })
-    .catch(error => {
-        callback(new Error(error), null);
-    });
-}
+// function exchgIndependentReserve(callback) {
+//   var uri = 'https://api.independentreserve.com/Public/GetMarketSummary?primaryCurrencyCode=xbt&secondaryCurrencyCode=aud';
+//   axios.get(uri).then(ir => {
+//           console.log(ir.data);
+//           callback(null, {'currentHighestBidPrice': ir.data.CurrentHighestBidPrice, 'currentLowestOfferPrice': ir.data.CurrentLowestOfferPrice});
+//         })
+//     .catch(error => {
+//         callback(new Error(error), null);
+//     });
+// }
 
-function exchgSurBitcoin(callback) {
-  var uri = 'https://api.blinktrade.com/api/v1/VEF/ticker?crypto_currency=BTC'
-   axios.get(uri).then(res => {
-        console.log('Response from SurBitcoin: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
-      })
-    .catch(error => {
-        callback(new Error(error), null);
-    });
-}
+// function exchgSurBitcoin(callback) {
+//   var uri = 'https://api.blinktrade.com/api/v1/VEF/ticker?crypto_currency=BTC'
+//   axios.get(uri).then(res => {
+//         console.log('Response from SurBitcoin: ' + res.data);
+//         callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
+//       })
+//     .catch(error => {
+//         callback(new Error(error), null);
+//     });
+// }
 
-function exchgChileBit(callback) {
-  var uri = 'https://api.blinktrade.com/api/v1/CLP/ticker?crypto_currency=BTC'
-   axios.get(uri).then(res => {
-        console.log('Response from ChileBit: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
-      })
-    .catch(error => {
-        callback(new Error(error), null);
-    });
-}
+// function exchgChileBit(callback) {
+//   var uri = 'https://api.blinktrade.com/api/v1/CLP/ticker?crypto_currency=BTC'
+//   axios.get(uri).then(res => {
+//         console.log('Response from ChileBit: ' + res.data);
+//         callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
+//       })
+//     .catch(error => {
+//         callback(new Error(error), null);
+//     });
+// }
 
 router.get('/exchange/independent-reserve', (req, res) => {
   res.set('Content-Type', 'application/json');
@@ -225,65 +197,65 @@ router.get('/exchange/independent-reserve', (req, res) => {
 });
 
 
-function exchgFoxBit(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC'
-   axios.get(uri).then(res => {
-        console.log('Response from foxbit: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgFoxBit(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC'
+//   axios.get(uri).then(res => {
+//         console.log('Response from foxbit: ' + JSON.stringify(res.data));
+//         callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
-function exchgVBTC(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://api.blinktrade.com/api/v1/VND/ticker?crypto_currency=BTC'
-   axios.get(uri).then(res => {
-        console.log('Response from foxbit: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgVBTC(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://api.blinktrade.com/api/v1/VND/ticker?crypto_currency=BTC'
+//   axios.get(uri).then(res => {
+//         console.log('Response from foxbit: ' + res.data);
+//         callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
-function exchgUrduBitPKR(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://api.blinktrade.com/api/v1/PKR/ticker?crypto_currency=BTC'
-   axios.get(uri).then(res => {
-        console.log('Response from UrduBit: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgUrduBitPKR(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://api.blinktrade.com/api/v1/PKR/ticker?crypto_currency=BTC'
+//   axios.get(uri).then(res => {
+//         console.log('Response from UrduBit: ' + res.data);
+//         callback(null, {'currentHighestBidPrice': res.data.buy, 'currentLowestOfferPrice': res.data.sell});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
-function exchgBitcoinToYou(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://www.bitcointoyou.com/api/ticker.aspx'
-   axios.get(uri).then(res => {
-        console.log('Response from BitcoinToYou: buy [' + res.data.ticker.buy + '] sell [' + res.data.ticker.sell + ']');
-        callback(null, {'currentHighestBidPrice': res.data.ticker.buy, 'currentLowestOfferPrice': res.data.ticker.sell});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgBitcoinToYou(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://www.bitcointoyou.com/api/ticker.aspx'
+//   axios.get(uri).then(res => {
+//         console.log('Response from BitcoinToYou: buy [' + res.data.ticker.buy + '] sell [' + res.data.ticker.sell + ']');
+//         callback(null, {'currentHighestBidPrice': res.data.ticker.buy, 'currentLowestOfferPrice': res.data.ticker.sell});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
-function exchgMercadoBitcoin(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://www.mercadobitcoin.net/api/ticker/'
-   axios.get(uri).then(res => {
-        console.log('Response from Mercado Bitcoin: buy [' + res.data.ticker.buy + '] sell [' + res.data.ticker.sell + ']');
-        callback(null, {'currentHighestBidPrice': res.data.ticker.buy, 'currentLowestOfferPrice': res.data.ticker.sell});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgMercadoBitcoin(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://www.mercadobitcoin.net/api/ticker/'
+//   axios.get(uri).then(res => {
+//         console.log('Response from Mercado Bitcoin: buy [' + res.data.ticker.buy + '] sell [' + res.data.ticker.sell + ']');
+//         callback(null, {'currentHighestBidPrice': res.data.ticker.buy, 'currentLowestOfferPrice': res.data.ticker.sell});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
 router.get('/exchange/foxbit', (req, res) => {
   res.set('Content-Type', 'application/json');
@@ -298,17 +270,17 @@ router.get('/exchange/foxbit', (req, res) => {
         })
 });
 
-function exchgCoinsPH(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://quote.coins.ph/v1/markets/BTC-PHP'
-   axios.get(uri).then(res => {
-        console.log('Response from CoinsPH: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.market.bid, 'currentLowestOfferPrice': res.data.market.ask});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgCoinsPH(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://quote.coins.ph/v1/markets/BTC-PHP'
+//   axios.get(uri).then(res => {
+//         console.log('Response from CoinsPH: ' + JSON.stringify(res.data));
+//         callback(null, {'currentHighestBidPrice': res.data.market.bid, 'currentLowestOfferPrice': res.data.market.ask});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
 router.get('/exchange/coins-ph', (req, res) => {
   res.set('Content-Type', 'application/json');
@@ -323,17 +295,17 @@ router.get('/exchange/coins-ph', (req, res) => {
         })
 });
   
-function exchgCoinsTHB(callback) {
- var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://quote.coins.ph/v1/markets/BTC-THB'
-   axios.get(uri).then(res => {
-        console.log('Response from CoinsPH: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.market.bid, 'currentLowestOfferPrice': res.data.market.ask});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgCoinsTHB(callback) {
+// var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://quote.coins.ph/v1/markets/BTC-THB'
+//   axios.get(uri).then(res => {
+//         console.log('Response from CoinsPH: ' + res.data);
+//         callback(null, {'currentHighestBidPrice': res.data.market.bid, 'currentLowestOfferPrice': res.data.market.ask});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
 router.get('/exchange/coins-thb', (req, res) => {
   res.set('Content-Type', 'application/json');
@@ -348,17 +320,17 @@ router.get('/exchange/coins-thb', (req, res) => {
         })
 });
 
-function exchgBTCe(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://btc-e.com/api/3/ticker/btc_rur'
-   axios.get(uri).then(res => {
-        console.log('Response from BTC-e: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.btc_rur.sell, 'currentLowestOfferPrice': res.data.btc_rur.buy});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgBTCe(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://btc-e.com/api/3/ticker/btc_rur'
+//   axios.get(uri).then(res => {
+//         console.log('Response from BTC-e: ' + res.data);
+//         callback(null, {'currentHighestBidPrice': res.data.btc_rur.sell, 'currentLowestOfferPrice': res.data.btc_rur.buy});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
 router.get('/exchange/btc-e', (req, res) => {
   res.set('Content-Type', 'application/json');
@@ -373,17 +345,17 @@ router.get('/exchange/btc-e', (req, res) => {
         })
 });
 
-function exchgLunoZAR(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"}
-  var uri = 'https://api.mybitx.com/api/1/ticker?pair=XBTZAR';
-   axios.get(uri).then(res => {
-        console.log('Response from Luno: ' + res.data);
-        callback(null, {'currentHighestBidPrice': res.data.bid, 'currentLowestOfferPrice': res.data.ask});
-      })
-  .catch(error => {
-      callback(new Error(error), null);
-  });
-}
+// function exchgLunoZAR(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"}
+//   var uri = 'https://api.mybitx.com/api/1/ticker?pair=XBTZAR';
+//   axios.get(uri).then(res => {
+//         console.log('Response from Luno: ' + res.data);
+//         callback(null, {'currentHighestBidPrice': res.data.bid, 'currentLowestOfferPrice': res.data.ask});
+//       })
+//   .catch(error => {
+//       callback(new Error(error), null);
+//   });
+// }
 
 router.get('/exchange/luno', (req, res) => {
   res.set('Content-Type', 'application/json');
@@ -397,25 +369,25 @@ router.get('/exchange/luno', (req, res) => {
           }
         })
 });
-function exchgCoinbaseUSD(callback) {
-  var headers = {"Content-type": "application/json","Accept": "text/plain"};
-  var response = {'currentHighestBidPrice': 0, 'currentLowestOfferPrice': 0};
-  var uriAsk = 'https://api.coinbase.com/v2/prices/BTC-USD/buy';
-  var uriBid = 'https://api.coinbase.com/v2/prices/BTC-USD/sell';
-   axios.get(uriBid).then(res => {
-        console.log('Response from Coinbase: ' + res.data.data);
-        response.currentHighestBidPrice = res.data.data.amount;
-        axios.get(uriAsk).then(res => {
-                console.log('Response from Coinbase: ' + res.data.data);
-                response.currentLowestOfferPrice = res.data.data.amount;
-                callback(null, response);
-              }).catch(error => {
-                callback(new Error(error), null);
-              });
-      }).catch(error => {
-        callback(new Error(error), null);
-      });
-}
+// function exchgCoinbaseUSD(callback) {
+//   var headers = {"Content-type": "application/json","Accept": "text/plain"};
+//   var response = {'currentHighestBidPrice': 0, 'currentLowestOfferPrice': 0};
+//   var uriAsk = 'https://api.coinbase.com/v2/prices/BTC-USD/buy';
+//   var uriBid = 'https://api.coinbase.com/v2/prices/BTC-USD/sell';
+//   axios.get(uriBid).then(res => {
+//         console.log('Response from Coinbase: ' + res.data.data);
+//         response.currentHighestBidPrice = res.data.data.amount;
+//         axios.get(uriAsk).then(res => {
+//                 console.log('Response from Coinbase: ' + res.data.data);
+//                 response.currentLowestOfferPrice = res.data.data.amount;
+//                 callback(null, response);
+//               }).catch(error => {
+//                 callback(new Error(error), null);
+//               });
+//       }).catch(error => {
+//         callback(new Error(error), null);
+//       });
+// }
 
 router.get('/exchange/coinbase', (req, res) => {
     `
@@ -439,13 +411,33 @@ router.get('/exchange/coinbase', (req, res) => {
 
 router.get('/arbitrage', (req, res) => {
   console.log(req.query);
-  if (! req.query.sourceCountry) {
-    res.status(400).send({data: [], error: {code: 400, message: 'source currency must be informed '}});
+  if ( (!req.query.sourceCountry) || (!COUNTRIES[req.query.sourceCountry]) ) {
+    res.status(400).send({data: [], error: {code: 400, message: 'source country is blank or not supported '}});
     return;
   }
   
-  if (! req.query.targetCountry) {
-    res.status(400).send({data: [], error: {code: 400, message: 'target currency must be informed '}});
+  if ( (!req.query.targetCountry) || (!COUNTRIES[req.query.targetCountry])) {
+    res.status(400).send({data: [], error: {code: 400, message: 'target country is blank or not supported '}});
+    return;
+  }
+  
+  if ((! req.query.sourceExchange) || (!exchanges.EXCHANGES[req.query.sourceExchange])) {
+    res.status(400).send({data: [], error: {code: 400, message: 'source exchange is blank or not supported '}});
+    return;
+  }
+
+  if ((! req.query.targetExchange) || (!exchanges.EXCHANGES[req.query.targetExchange])) {
+    res.status(400).send({data: [], error: {code: 400, message: 'target exchange is blank or not supported '}});
+    return;
+  }
+
+  if (COUNTRIES[req.query.sourceCountry].exchanges.indexOf(req.query.sourceExchange) === -1) {
+    res.status(400).send({data: [], error: {code: 400, message: 'source exchange not valid for country ' + req.query.sourceCountry }});
+    return;
+  }
+
+  if (COUNTRIES[req.query.targetCountry].exchanges.indexOf(req.query.targetExchange) === -1) {
+    res.status(400).send({data: [], error: {code: 400, message: 'target exchange not valid for country ' + req.query.targetCountry }});
     return;
   }
   
@@ -468,7 +460,7 @@ router.get('/arbitrage', (req, res) => {
   var numberOfBitcoinsBoughtAtOrigin = 0;
   var amountInDestinationCurrencyAfterSale = 0.0;
   
-  EXCHANGES[sourceExchange]((err, data) => {
+  exchanges.EXCHANGES[sourceExchange]((err, data) => {
     if (err) {
       res.status(500).send(err.message);
       return;
@@ -477,7 +469,7 @@ router.get('/arbitrage', (req, res) => {
       numberOfBitcoinsBoughtAtOrigin = baseAmount / sourceBTCMarketPrice['currentLowestOfferPrice'];
       console.log('Number of bitcoins bought at source ' +  numberOfBitcoinsBoughtAtOrigin);
       var exchange = findExchange()
-      EXCHANGES[targetExchange]((err, data) => {
+      exchanges.EXCHANGES[targetExchange]((err, data) => {
         if (err) {
           res.status(500).send('Error retrieving bitcoin price at target exchange ' + err.message);
           return;
@@ -498,14 +490,10 @@ router.get('/arbitrage', (req, res) => {
 
           if (sourceCountry !== targetCountry) {
             
-            getExchangeRate(sourceCountry, targetCountry, (err, data) => {
-              if (err) {
-                console.log('This is the error: ' + err.message);
-                res.status(400).send({data: [], error: {code: 400, message: err.message}});
-              } else {
-                console.log('this is the rate: ' + data);
-                exchangeRate = data;
-                amountAtSpotRate = baseAmount * exchangeRate;
+            getExchangeRate(sourceCountry, targetCountry)
+            .then(function(exchangeRateObj) {
+                console.log('this is the rate: ' + JSON.stringify(exchangeRateObj, null, 2));
+                amountAtSpotRate = baseAmount * exchangeRateObj.exchangeRate;
                 if (amountInDestinationCurrencyAfterSale > amountAtSpotRate) {
                   r['sign'] = '+';
                   r['percentage'] = parseFloat((amountInDestinationCurrencyAfterSale - amountAtSpotRate) / amountAtSpotRate * 100).toFixed(2) + "%";
@@ -513,11 +501,15 @@ router.get('/arbitrage', (req, res) => {
                   r['sign'] = '-';
                   r['percentage'] = parseFloat((amountAtSpotRate - amountInDestinationCurrencyAfterSale) / amountInDestinationCurrencyAfterSale * 100).toFixed(2) + "%";
                 }
-                r['spotRate'] = parseFloat(exchangeRate).toFixed(3);
+                r['spotRate'] = parseFloat(exchangeRateObj.exchangeRate).toFixed(3);
+                r['rateAgeInMinutes'] = exchangeRateObj.rateAgeInMinutes;
+                r['rateRetrievedFrom'] = exchangeRateObj.retrievedFrom;
                 r['amountInDestinationCurrencyUsingSpotRate'] = COUNTRIES[targetCountry].currencySymbol + " " + parseFloat(amountAtSpotRate).toFixed(2);
                 res.status(200).send({data: r});
-              }
-            
+            })
+            .catch(function(err) {
+              console.log('This is the error: ' + err.message);
+              res.status(400).send({data: [], error: {code: 400, message: err.message}});
             });
           } else {
             res.status(200).json(r);
