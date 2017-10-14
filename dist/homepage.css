@@ -1,0 +1,171 @@
+html {
+    font-family: sans-serif;
+    height: 100%;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+[class*=Col] {
+    float: left;
+    padding: 15px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.remmitFormLine {
+    margin-bottom: 1em;
+}
+
+.remmitError {
+    color: #FF4136;
+}
+
+.remmitSourceCountry {
+    float: left;
+    background-color: #F0F0F0;
+    width: 45%;
+    padding: 20px;
+    height: 217px;
+    margin-top: 50px;
+    margin: 12px;
+    color: rgb(0, 0, 0);
+    border: 0.2px solid #DEB887;
+}
+
+.remmitTargetCountry {
+    float: right;
+    background-color: #F0F0F0;
+    width: 45%;
+    padding: 20px;
+    height: 217px;
+    margin-top: 50px;
+    margin: 12px;
+    color: rgb(0, 0, 0);
+    border: 0.2px solid #DEB887;
+}
+
+.remmitButton {
+    background-color: #4CAF50;
+    border: 0.2px solid #111111;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+#Ads {
+    padding: 10px;
+    border: 2px dashed #2ECC40;
+    height: 80%;
+    margin: 15%;
+}
+
+.remmitFooter {
+    background-color: #0099cc;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    padding: 15px;
+}
+
+.remmitRow {
+    height: 80vh;
+}
+
+.remmitfunction {
+    padding: 15px;
+    margin: 15px;
+    height: 100%;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+}
+
+.remmitCol1 {
+    width: 8.33%;
+}
+
+.remmitCol2 {
+    width: 16.33%;
+}
+
+.remmitCol3 {
+    width: 25%;
+}
+
+.remmitCol3 > .remmitRight {
+    height: 100%;
+}
+
+.remmitCol4 {
+    width: 33.33%;
+}
+
+.remmitCol5 {
+    width: 41.66%;
+}
+
+.remmitCol6 {
+    width: 50%;
+}
+
+.remmitCol7 {
+    width: 58.33%;
+}
+
+.remmitCol8 {
+    width: 66.66%;
+}
+
+.remmitCol9 {
+    width: 75%;
+}
+
+.remmitCol10 {
+    width: 83.33%;
+}
+
+.remmitCol11 {
+    width: 91.66%;
+}
+
+.remmitCol12 {
+    width: 100%;
+}
+
+.remmitBottomResult {
+    border: 1px solid;
+    border-color: #DADAA9;
+    font-size: 0.5em;
+    background-color: #fff5ee;
+    padding: 20px;
+}
+
+.remmitRowgrid {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    padding: 2px;
+}
+
+.remmitCRol {
+    display: table-cell;
+}
+
+.remmitResult {
+    margin: 37px;
+    background-color: #dadad2;
+    display: block;
+    float: left;
+    border: 1px solid;
+    border-color: #DADAA9;
+    font-size: 1.5em;
+    padding: 10px;
+}
