@@ -4,7 +4,9 @@ import Css exposing (..)
 import Css.Elements exposing (..)
 import Css.Colors exposing (..)
 import Css.Namespace exposing (namespace)
+import Css.Media exposing (..)
 import StyleTypes exposing (..)
+
 
 css =
     (stylesheet << namespace cssNameSpace.name)
@@ -15,12 +17,12 @@ css =
         , Css.selector "h1"
             [ Css.fontSize (Css.em 2)
             ]
+        , Css.selector "*"
+            [Css.boxSizing borderBox
+            ]
         , Css.selector "[class*=Col]"
             [ Css.float left
             , Css.padding (px 15)
-            ]
-        , Css.selector "*"
-            [Css.boxSizing borderBox
             ]
         , Css.class FormLine
             [ Css.marginBottom (Css.em 1)
@@ -59,7 +61,7 @@ css =
             , Css.display  inlineBlock
             , Css.fontSize (px 12)
             , Css.margin (px 4)
-            , Css.cursor pointer
+            , Css.cursor Css.pointer
             ]
         , Css.id Ads
             [ Css.padding (px 10)
@@ -86,51 +88,49 @@ css =
             , Css.textAlign center
             , Css.fontSize (px 14)
             ]
-        -- @media only screen and (min-width: 768px) {
---     /* For desktop: */
         , Css.class Col1 [ Css.width (pct 8.33) ]
-        , Css.class Col2 [ Css.width (pct 16.33) ]
-        , Css.class Col3 [ Css.width (pct 25)
-            , children [ 
-                Css.class Right 
-                    [ Css.height (pct 100) ]
-            ]
-        ]
-    
-        , Css.class Col4 [ Css.width (pct 33.33) ]
-        , Css.class Col5 [ Css.width (pct 41.66) ]
-        , Css.class Col6 [ Css.width (pct 50) ]
-        , Css.class Col7 [ Css.width (pct 58.33) ]
-        , Css.class Col8 [ Css.width (pct 66.66) ]
-        , Css.class Col9 [ Css.width (pct 75) ]
-        , Css.class Col10 [ Css.width (pct 83.33) ]
-        , Css.class Col11 [ Css.width (pct 91.66) ]
-        , Css.class Col12 [ Css.width (pct 100) ]
-        , Css.class BottomResult 
-            [ Css.border2 (px 1) solid
-            , Css.borderColor (hex "#DADAA9")
-            , Css.fontSize (Css.em 0.5)
-            , Css.backgroundColor (hex "#fff5ee")
-            , Css.padding (px 20)
-            ]
-        , Css.class Rowgrid
-            [ Css.width (pct 100)
-            , Css.display Css.table
-            -- this was a pain in the neck to figure out. Add this when the element is not supported by elm-css
-            , (property "table-layout" "fixed")
-            , Css.padding (px 2)
-            ]
-        , Css.class CRol [ Css.display Css.tableCell]
-        , Css.class Result 
-            [ Css.margin (px 37)
-            , Css.backgroundColor (hex "#dadad2")
-            , Css.display block
-            , Css.float left
-            , Css.border2 (px 1) solid
-            , Css.borderColor (hex "#DADAA9")
-            , Css.fontSize (Css.em 1.5)
-            , Css.padding (px 10)
-            ]
+            , Css.class Col2 [ Css.width (pct 16.33) ]
+            , Css.class Col3 [ Css.width (pct 25)
+                , children [ 
+                    Css.class Right 
+                        [ Css.height (pct 100) ]
+                    ]
+                ]
+        
+            , Css.class Col4 [ Css.width (pct 33.33) ]
+            , Css.class Col5 [ Css.width (pct 41.66) ]
+            , Css.class Col6 [ Css.width (pct 50) ]
+            , Css.class Col7 [ Css.width (pct 58.33) ]
+            , Css.class Col8 [ Css.width (pct 66.66) ]
+            , Css.class Col9 [ Css.width (pct 75) ]
+            , Css.class Col10 [ Css.width (pct 83.33) ]
+            , Css.class Col11 [ Css.width (pct 91.66) ]
+            , Css.class Col12 [ Css.width (pct 100) ]
+            , Css.class BottomResult 
+                [ Css.border2 (px 1) solid
+                , Css.borderColor (hex "#DADAA9")
+                , Css.fontSize (Css.em 0.5)
+                , Css.backgroundColor (hex "#fff5ee")
+                , Css.padding (px 20)
+                ]
+            , Css.class Rowgrid
+                [ Css.width (pct 100)
+                , Css.display Css.table
+                -- this was a pain in the neck to figure out. Add this when the element is not supported by elm-css
+                , (property "table-layout" "fixed")
+                , Css.padding (px 2)
+                ]
+            , Css.class CRol [ Css.display Css.tableCell]
+            , Css.class Result 
+                [ Css.margin (px 37)
+                , Css.backgroundColor (hex "#dadad2")
+                , Css.display block
+                , Css.float left
+                , Css.border2 (px 1) solid
+                , Css.borderColor (hex "#DADAA9")
+                , Css.fontSize (Css.em 1.5)
+                , Css.padding (px 10)
+                ]
 
 
 -- div .bottomResult {

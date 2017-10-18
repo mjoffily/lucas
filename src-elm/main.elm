@@ -50,6 +50,11 @@ type alias ArbitrageResponse =
     , exchangeDestination: String
     , sign: String
     , percentage: String
+    , sourceHighestBidPrice: String
+    , sourceLowestOfferPrice: String
+    , targetHighestBidPrice: String
+    , targetLowestOfferPrice: String
+
     }
     
 type alias Model =
@@ -169,6 +174,66 @@ getSignDIV arbitrageResponse =
     else
         Html.div [] []
 
+showInputForm : Model -> Html Msg
+showInputForm model =
+    case model.arbitrageResponse of
+        Nothing ->
+            if model.waitingResponse == False then
+                Html.div []
+                    [ Html.div [ class [ SourceCountry ] ]
+                        [ Html.div [ class [FormLine] ] 
+                            [ Html.span [] [Html.text "Source country: "]
+                            -- append an empty country to the beginning of the countriesList (emptyCountry :: model.countriesList)
+                            , Html.select [ on "change" (Json.map SourceCountrySelected targetValue) ] (List.map countryDDLB (emptyCountry :: model.countriesList))
+                            ]
+                        , Html.div [class [FormLine]] [ Html.span [] [Html.text ("Currency: " ++ model.sourceCurrency)] ]
+                        , Html.div [class [FormLine]] 
+                            [ Html.span [] [Html.text "Exchange: "]
+                            , Html.select [ on "change" (Json.map SourceExchangeSelected targetValue) ]
+                              (List.map createOptionsForDDLB (dealWithEmptyList model.sourcePossibleExchanges))
+                            ]
+                        , Html.div [class [FormLine]] 
+                            [ Html.span [] [Html.text "Amount: "]
+                            , Html.input
+                                [ type_ "text"
+                                , placeholder "0.00"
+                                , onInput InputAmount
+                                , Html.Attributes.value model.amount
+                                ]
+                                []
+                            ]
+                        ]
+                    , Html.div [ class [ TargetCountry ] ]
+                        [ Html.div [class [FormLine]] 
+                            [ Html.span [] [Html.text "Target country: "]
+                            , Html.select [ on "change" (Json.map TargetCountrySelected targetValue) ] (List.map countryDDLB (emptyCountry :: model.countriesList))
+                            ]
+                        , Html.div [class [FormLine]] [ Html.span [] [Html.text ("Currency: " ++ model.targetCurrency)] ]
+                        , Html.div [class [FormLine]] 
+                            [ Html.span [] [Html.text "Exchange: "]
+                            , Html.select [ on "change" (Json.map TargetExchangeSelected targetValue) ]
+                                (List.map createOptionsForDDLB (dealWithEmptyList model.targetPossibleExchanges))
+                            ]
+                        ]
+                    ]
+            else
+                Html.text ""
+                
+        Just val ->
+            Html.text ""
+
+showButton : Model -> Html Msg
+showButton model =
+    case model.arbitrageResponse of
+        Nothing ->
+            if model.waitingResponse == False then
+                Html.div [ class [ButtonDiv] ] [ Html.button [ class [Button], onClick FetchArbitrageResult] [Html.text "Go"] ]
+            else 
+                Html.text ""
+        
+        Just val ->
+            Html.div [ class [ButtonDiv] ] [ Html.button [ class [Button], onClick ClearArbitrageResult] [Html.text "Clear"] ]
+        
 showResult : Model -> Html Msg
 showResult model =
     case model.arbitrageResponse of
@@ -180,8 +245,7 @@ showResult model =
             
         Just val ->
             Html.div [ class [Result]] 
-                [ Html.p [] [ Html.text model.errorMessage ]
-                , (getSignDIV (getArbitrageResponse model.arbitrageResponse)) 
+                [ (getSignDIV (getArbitrageResponse model.arbitrageResponse)) 
                 , Html.div [class [BottomResult] ] 
                     [Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Spot Rate:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).currencyPair ++ " " ++ (getArbitrageResponse model.arbitrageResponse).spotRate)] ]
                    , Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Amount in source currency:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).amountInSourceCurrency)] ]
@@ -190,9 +254,13 @@ showResult model =
                    , Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Bitcoins bought at source country:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).numberOfBitcoinsBoughtAtOrigin)] ]
                    , Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Source exchange:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).exchangeSource)] ]
                    , Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Target exchange:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).exchangeDestination)] ]
+                   , Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Source highest bid price:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).sourceHighestBidPrice)] ]
+                   , Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Target highest bid price:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).targetHighestBidPrice)] ]
+                   , Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Source lowest offer price:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).sourceLowestOfferPrice)] ]
+                   , Html.div [class [Rowgrid] ] [ Html.div [class [ CRol ] ] [Html.text "Target lowest offer price:"], Html.div [class [ CRol ] ] [Html.text ((getArbitrageResponse model.arbitrageResponse).targetLowestOfferPrice)] ]
                    ]
                 ]
-         
+
 showSpinner : Model -> Html Msg
 showSpinner model = 
     case model.waitingResponse of
@@ -248,6 +316,10 @@ arbitrageResponseDecoder =
     |> Json.Decode.Pipeline.required "exchangeDestination" string
     |> Json.Decode.Pipeline.required "sign" string
     |> Json.Decode.Pipeline.required "percentage" string
+    |> Json.Decode.Pipeline.required "sourceHighestBidPrice" string
+    |> Json.Decode.Pipeline.required "sourceLowestOfferPrice" string
+    |> Json.Decode.Pipeline.required "targetHighestBidPrice" string
+    |> Json.Decode.Pipeline.required "targetLowestOfferPrice" string
     |> at ["data"]
     
 initModel : Model
@@ -307,7 +379,12 @@ getArbitrageResponse arbitrageResponse =
             , exchangeSource = ""
             , exchangeDestination = ""
             , sign = ""
-            , percentage = ""}
+            , percentage = ""
+            , sourceHighestBidPrice = ""
+            , sourceLowestOfferPrice = ""
+            , targetHighestBidPrice = ""
+            , targetLowestOfferPrice = ""
+            }
         
         Just arbitrageResponse ->
             arbitrageResponse
@@ -338,6 +415,7 @@ type Msg
     | SupportedCountriesRequested (Result Http.Error SupportedCountries)
     | ArbitrageRequested (Result Http.Error ArbitrageResponse)
     | FetchArbitrageResult
+    | ClearArbitrageResult
     | DetailResponseExpandOrContract
     | SourceCountrySelected String
     | TargetCountrySelected String
@@ -399,6 +477,8 @@ update msg model =
         FetchArbitrageResult ->
             { model | arbitrageResponse = Nothing, waitingResponse = True, errorMessage = "" } ! [postRequestCommand model]
 
+        ClearArbitrageResult ->
+            { model | arbitrageResponse = Nothing } ! []
         _ ->
             model ! []
 
@@ -406,48 +486,11 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Html.div []
-        [
-        Html.div []
-            [ Html.div [ class [ SourceCountry ] ]
-                [ Html.div [ class [FormLine] ] 
-                    [ Html.span [] [Html.text "Source country: "]
-                    -- append an empty country to the beginning of the countriesList (emptyCountry :: model.countriesList)
-                    , Html.select [ on "change" (Json.map SourceCountrySelected targetValue) ] (List.map countryDDLB (emptyCountry :: model.countriesList))
-                    ]
-                , Html.div [class [FormLine]] [ Html.span [] [Html.text ("Currency: " ++ model.sourceCurrency)] ]
-                , Html.div [class [FormLine]] 
-                    [ Html.span [] [Html.text "Exchange: "]
-                    , Html.select [ on "change" (Json.map SourceExchangeSelected targetValue) ]
-                      (List.map createOptionsForDDLB (dealWithEmptyList model.sourcePossibleExchanges))
-                    ]
-                , Html.div [class [FormLine]] 
-                    [ Html.span [] [Html.text "Amount: "]
-                    , Html.input
-                        [ type_ "text"
-                        , placeholder "0.00"
-                        , onInput InputAmount
-                        , Html.Attributes.value model.amount
-                        ]
-                        []
-                    ]
-                ]
-            , Html.div [ class [ TargetCountry ] ]
-                [ Html.div [class [FormLine]] 
-                    [ Html.span [] [Html.text "Target country: "]
-                    , Html.select [ on "change" (Json.map TargetCountrySelected targetValue) ] (List.map countryDDLB (emptyCountry :: model.countriesList))
-                    ]
-                , Html.div [class [FormLine]] [ Html.span [] [Html.text ("Currency: " ++ model.targetCurrency)] ]
-                , Html.div [class [FormLine]] 
-                    [ Html.span [] [Html.text "Exchange: "]
-                    , Html.select [ on "change" (Json.map TargetExchangeSelected targetValue) ]
-                        (List.map createOptionsForDDLB (dealWithEmptyList model.targetPossibleExchanges))
-                    ]
-                ]
-            , Html.div [] [ Html.button [ class [Button], onClick FetchArbitrageResult] [Html.text "Go"] ]
-            ]
+        [ showInputForm model
           --  , Html.div [] [Html.text (toString model.sourceExchange),  Html.text (toString model.targetExchange)]
-            , showResult model 
-            , showSpinner model
+        , showResult model 
+        , showSpinner model
+        , showButton model 
         ]
         
     

@@ -7,13 +7,13 @@ h1 {
     font-size: 2em;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 [class*=Col] {
     float: left;
     padding: 15px;
-}
-
-* {
-    box-sizing: border-box;
 }
 
 .remmitFormLine {

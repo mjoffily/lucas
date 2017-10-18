@@ -3,7 +3,7 @@ var _user$project$StylePort$fileStructure = _rtfeldman$elm_css$Css_File$toFileSt
 		ctor: '::',
 		_0: {
 			ctor: '_Tuple2',
-			_0: 'homepage.css',
+			_0: 'desktop.css',
 			_1: _rtfeldman$elm_css$Css_File$compile(
 				{
 					ctor: '::',
@@ -11,7 +11,20 @@ var _user$project$StylePort$fileStructure = _rtfeldman$elm_css$Css_File$toFileSt
 					_1: {ctor: '[]'}
 				})
 		},
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'mobile.css',
+				_1: _rtfeldman$elm_css$Css_File$compile(
+					{
+						ctor: '::',
+						_0: _user$project$AppStylesMobile$css,
+						_1: {ctor: '[]'}
+					})
+			},
+			_1: {ctor: '[]'}
+		}
 	});
 var _user$project$StylePort$files = _elm_lang$core$Native_Platform.outgoingPort(
 	'files',

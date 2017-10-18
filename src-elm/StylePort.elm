@@ -2,6 +2,7 @@ port module StylePort exposing (..)
 
 import Css.File exposing (CssCompilerProgram, CssFileStructure)
 import AppStyles as AppStyles
+import AppStylesMobile as AppStylesMobile
 
 
 port files : CssFileStructure -> Cmd msg
@@ -10,7 +11,7 @@ port files : CssFileStructure -> Cmd msg
 fileStructure : CssFileStructure
 fileStructure =
     Css.File.toFileStructure
-        [ ( "homepage.css", Css.File.compile [ AppStyles.css ] ) ]
+        [ ( "desktop.css", Css.File.compile [ AppStyles.css ] ), ( "mobile.css", Css.File.compile [ AppStylesMobile.css ] ) ]
 
 
 

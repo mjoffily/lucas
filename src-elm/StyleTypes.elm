@@ -9,8 +9,11 @@ cssNameSpace =
 type CssClasses
     = TopResult
     | Result
+    | Header
     | BottomResult
     | Error
+    | CoinPrice
+    | ButtonDiv
     | FormLine
     | Button
     | Footer
