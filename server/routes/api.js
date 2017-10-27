@@ -5,7 +5,7 @@ const express = require('express');
 const axios = require('axios');
 var utils = require('./api.utils');
 var exchanges = require('./api.exchanges');
-
+var conn = require('./api.connect');
 
 const router = express.Router();
 
@@ -249,8 +249,43 @@ router.get('/exchange/coinbase', (req, res) => {
         })
 });
 
+router.get('/request-list', (req, res) => {
+  var minutes = req.query.minutes
+  if (! minutes) {
+    minutes = 10;
+  }
+  
+  conn.showRequests(minutes).then(function(data) {
+    res.status(200).json(data);
+    return;
+  })
+  .catch(function(error) {
+    res.status(500).send(error);
+    return;
+    
+  })
+  
+});
+
+function format2(currency, n) {
+  return new Promise(function (resolve, reject) {
+    if (!currency) {
+      currency = "";
+    }
+//    console.log("this is n: " + n + " typeof n: " + typeof n);
+    resolve(currency + " " + parseFloat(n).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,"));
+  })
+}
+
 router.get('/arbitrage', (req, res) => {
-  console.log(req.query);
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  conn.saveRequest(req.query, req.headers, ip).then(function() {
+    console.log("Request saved");
+  })
+  .catch(function(error) {
+    console.log("/arbitrage - ERROR saving request to database " + error);
+  });
+  // console.log(req.query);
   if ( (!req.query.sourceCountry) || (!COUNTRIES[req.query.sourceCountry]) ) {
     res.status(400).send({data: [], error: {code: 400, message: 'source country is blank or not supported '}});
     return;
@@ -308,7 +343,6 @@ router.get('/arbitrage', (req, res) => {
       sourceBTCMarketPrice = data;
       numberOfBitcoinsBoughtAtOrigin = baseAmount / sourceBTCMarketPrice['currentLowestOfferPrice'];
       console.log('Number of bitcoins bought at source ' +  numberOfBitcoinsBoughtAtOrigin);
-      var exchange = findExchange()
       exchanges.EXCHANGES[targetExchange]((err, data) => {
         if (err) {
           res.status(500).send('Error retrieving bitcoin price at target exchange ' + err.message);
@@ -321,16 +355,20 @@ router.get('/arbitrage', (req, res) => {
           var r = {}
           r['spotRate'] = parseFloat(exchangeRate).toFixed(3) + "%";
           r['currencyPair'] = COUNTRIES[sourceCountry].currencySymbol + "/" + COUNTRIES[targetCountry].currencySymbol;
-          r['amountInSourceCurrency'] = COUNTRIES[sourceCountry].currencySymbol + " " + parseFloat(baseAmount).toFixed(2);
-          r['amountInDestinationCurrencyUsingSpotRate'] = COUNTRIES[targetCountry].currencySymbol + " " + parseFloat(amountAtSpotRate).toFixed(2);
+          format2(COUNTRIES[sourceCountry].currencySymbol, baseAmount).then(amt => { r['amountInSourceCurrency'] = amt; }).catch(err => {console.log("ERR: 1");});
+          format2(COUNTRIES[targetCountry].currencySymbol, amountAtSpotRate).then(amt => { r['amountInDestinationCurrencyUsingSpotRate'] = amt; }).catch(err => {console.log("ERR: 2");});
           r['numberOfBitcoinsBoughtAtOrigin'] = parseFloat(numberOfBitcoinsBoughtAtOrigin).toFixed(8);
-          r['amountInDestinationCurrencyAfterBitcoinSale'] = COUNTRIES[targetCountry].currencySymbol + " " + parseFloat(amountInDestinationCurrencyAfterSale).toFixed(2);
+          format2(COUNTRIES[targetCountry].currencySymbol, amountInDestinationCurrencyAfterSale).then(amt => { r['amountInDestinationCurrencyAfterBitcoinSale'] = amt;}).catch(err => {console.log("ERR: 3");});
           r['exchangeSource'] = sourceExchange;
           r['exchangeDestination'] = targetExchange;
-          r['sourceHighestBidPrice'] = parseFloat(sourceBTCMarketPrice['currentHighestBidPrice']).toFixed(2);
-          r['sourceLowestOfferPrice'] = parseFloat(sourceBTCMarketPrice['currentLowestOfferPrice']).toFixed(2);
-          r['targetHighestBidPrice'] = parseFloat(targetBTCMarketPrice['currentHighestBidPrice']).toFixed(2);
-          r['targetLowestOfferPrice'] = parseFloat(targetBTCMarketPrice['currentLowestOfferPrice']).toFixed(2);
+          format2(COUNTRIES[sourceCountry].currencySymbol, sourceBTCMarketPrice['currentHighestBidPrice']).then(amt => { r['sourceHighestBidPrice'] = amt; });
+          format2(COUNTRIES[sourceCountry].currencySymbol, sourceBTCMarketPrice['currentLowestOfferPrice']).then(amt => { r['sourceLowestOfferPrice'] = amt; });
+          format2(COUNTRIES[targetCountry].currencySymbol, targetBTCMarketPrice['currentHighestBidPrice']).then(amt => { r['targetHighestBidPrice'] = amt; COUNTRIES[targetCountry].currencySymbol});
+          format2(COUNTRIES[targetCountry].currencySymbol,  targetBTCMarketPrice['currentLowestOfferPrice']).then(amt => { r['targetLowestOfferPrice'] = amt; COUNTRIES[targetCountry].currencySymbol});
+          // r['sourceHighestBidPrice'] = parseFloat(sourceBTCMarketPrice['currentHighestBidPrice']).toFixed(2);
+          // r['sourceLowestOfferPrice'] = parseFloat(sourceBTCMarketPrice['currentLowestOfferPrice']).toFixed(2);
+          // r['targetHighestBidPrice'] = parseFloat(targetBTCMarketPrice['currentHighestBidPrice']).toFixed(2);
+          // r['targetLowestOfferPrice'] = parseFloat(targetBTCMarketPrice['currentLowestOfferPrice']).toFixed(2);
           r['sign'] = "";
           r['percentage'] = "";
           r['rateAgeInMinutes'] = "";
@@ -343,6 +381,8 @@ router.get('/arbitrage', (req, res) => {
             .then(function(exchangeRateObj) {
                 console.log('this is the rate: ' + JSON.stringify(exchangeRateObj, null, 2));
                 amountAtSpotRate = baseAmount * exchangeRateObj.exchangeRate;
+                console.log("amountInDestinationCurrencyAfterSale: " + amountInDestinationCurrencyAfterSale);
+                console.log("amountAtSpotRate: " + amountAtSpotRate);
                 if (amountInDestinationCurrencyAfterSale > amountAtSpotRate) {
                   r['sign'] = '+';
                   r['percentage'] = parseFloat((amountInDestinationCurrencyAfterSale - amountAtSpotRate) / amountAtSpotRate * 100).toFixed(2) + "%";
@@ -353,7 +393,7 @@ router.get('/arbitrage', (req, res) => {
                 r['spotRate'] = parseFloat(exchangeRateObj.exchangeRate).toFixed(3);
                 r['rateAgeInMinutes'] = exchangeRateObj.rateAgeInMinutes;
                 r['rateRetrievedFrom'] = exchangeRateObj.retrievedFrom;
-                r['amountInDestinationCurrencyUsingSpotRate'] = COUNTRIES[targetCountry].currencySymbol + " " + parseFloat(amountAtSpotRate).toFixed(2);
+                format2(COUNTRIES[targetCountry].currencySymbol, amountAtSpotRate).then(amt => { r['amountInDestinationCurrencyUsingSpotRate'] = amt; }).catch(err => {console.log("ERR: 4");});
                 res.status(200).send({data: r});
             })
             .catch(function(err) {

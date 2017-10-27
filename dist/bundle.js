@@ -15248,36 +15248,17 @@ var _user$project$AppStyles$css = function (_p0) {
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_rtfeldman$elm_css$Css_Media$media,
+						_rtfeldman$elm_css$Css$selector,
+						'[class*=Col]',
 						{
 							ctor: '::',
-							_0: A2(
-								_rtfeldman$elm_css$Css_Media$only,
-								_rtfeldman$elm_css$Css_Media$screen,
-								{
-									ctor: '::',
-									_0: _rtfeldman$elm_css$Css_Media$maxWidth(
-										_rtfeldman$elm_css$Css$px(768)),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_rtfeldman$elm_css$Css$selector,
-								'[class*=Col]',
-								{
-									ctor: '::',
-									_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
-									_1: {
-										ctor: '::',
-										_0: _rtfeldman$elm_css$Css$padding(
-											_rtfeldman$elm_css$Css$px(15)),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
+							_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
+							_1: {
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$padding(
+									_rtfeldman$elm_css$Css$px(15)),
+								_1: {ctor: '[]'}
+							}
 						}),
 					_1: {
 						ctor: '::',
@@ -15564,215 +15545,205 @@ var _user$project$AppStyles$css = function (_p0) {
 														_1: {
 															ctor: '::',
 															_0: A2(
-																_rtfeldman$elm_css$Css_Media$media,
+																_rtfeldman$elm_css$Css$class,
+																_user$project$StyleTypes$Col1,
 																{
 																	ctor: '::',
-																	_0: A2(
-																		_rtfeldman$elm_css$Css_Media$only,
-																		_rtfeldman$elm_css$Css_Media$screen,
-																		{
-																			ctor: '::',
-																			_0: _rtfeldman$elm_css$Css_Media$minWidth(
-																				_rtfeldman$elm_css$Css$px(0)),
-																			_1: {
-																				ctor: '::',
-																				_0: _rtfeldman$elm_css$Css_Media$maxWidth(
-																					_rtfeldman$elm_css$Css$px(480)),
-																				_1: {ctor: '[]'}
-																			}
-																		}),
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: A2(
-																		_rtfeldman$elm_css$Css$class,
-																		_user$project$StyleTypes$CoinPrice,
-																		{
-																			ctor: '::',
-																			_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$none),
-																			_1: {ctor: '[]'}
-																		}),
+																	_0: _rtfeldman$elm_css$Css$width(
+																		_rtfeldman$elm_css$Css$pct(8.33)),
 																	_1: {ctor: '[]'}
 																}),
 															_1: {
 																ctor: '::',
 																_0: A2(
 																	_rtfeldman$elm_css$Css$class,
-																	_user$project$StyleTypes$Col1,
+																	_user$project$StyleTypes$Col2,
 																	{
 																		ctor: '::',
 																		_0: _rtfeldman$elm_css$Css$width(
-																			_rtfeldman$elm_css$Css$pct(8.33)),
+																			_rtfeldman$elm_css$Css$pct(16.33)),
 																		_1: {ctor: '[]'}
 																	}),
 																_1: {
 																	ctor: '::',
 																	_0: A2(
 																		_rtfeldman$elm_css$Css$class,
-																		_user$project$StyleTypes$Col2,
+																		_user$project$StyleTypes$Col3,
 																		{
 																			ctor: '::',
 																			_0: _rtfeldman$elm_css$Css$width(
-																				_rtfeldman$elm_css$Css$pct(16.33)),
-																			_1: {ctor: '[]'}
+																				_rtfeldman$elm_css$Css$pct(25)),
+																			_1: {
+																				ctor: '::',
+																				_0: _rtfeldman$elm_css$Css$children(
+																					{
+																						ctor: '::',
+																						_0: A2(
+																							_rtfeldman$elm_css$Css$class,
+																							_user$project$StyleTypes$Right,
+																							{
+																								ctor: '::',
+																								_0: _rtfeldman$elm_css$Css$height(
+																									_rtfeldman$elm_css$Css$pct(100)),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
 																		}),
 																	_1: {
 																		ctor: '::',
 																		_0: A2(
 																			_rtfeldman$elm_css$Css$class,
-																			_user$project$StyleTypes$Col3,
+																			_user$project$StyleTypes$Col4,
 																			{
 																				ctor: '::',
 																				_0: _rtfeldman$elm_css$Css$width(
-																					_rtfeldman$elm_css$Css$pct(25)),
-																				_1: {
-																					ctor: '::',
-																					_0: _rtfeldman$elm_css$Css$children(
-																						{
-																							ctor: '::',
-																							_0: A2(
-																								_rtfeldman$elm_css$Css$class,
-																								_user$project$StyleTypes$Right,
-																								{
-																									ctor: '::',
-																									_0: _rtfeldman$elm_css$Css$height(
-																										_rtfeldman$elm_css$Css$pct(100)),
-																									_1: {ctor: '[]'}
-																								}),
-																							_1: {ctor: '[]'}
-																						}),
-																					_1: {ctor: '[]'}
-																				}
+																					_rtfeldman$elm_css$Css$pct(33.33)),
+																				_1: {ctor: '[]'}
 																			}),
 																		_1: {
 																			ctor: '::',
 																			_0: A2(
 																				_rtfeldman$elm_css$Css$class,
-																				_user$project$StyleTypes$Col4,
+																				_user$project$StyleTypes$Col5,
 																				{
 																					ctor: '::',
 																					_0: _rtfeldman$elm_css$Css$width(
-																						_rtfeldman$elm_css$Css$pct(33.33)),
+																						_rtfeldman$elm_css$Css$pct(41.66)),
 																					_1: {ctor: '[]'}
 																				}),
 																			_1: {
 																				ctor: '::',
 																				_0: A2(
 																					_rtfeldman$elm_css$Css$class,
-																					_user$project$StyleTypes$Col5,
+																					_user$project$StyleTypes$Col6,
 																					{
 																						ctor: '::',
 																						_0: _rtfeldman$elm_css$Css$width(
-																							_rtfeldman$elm_css$Css$pct(41.66)),
+																							_rtfeldman$elm_css$Css$pct(50)),
 																						_1: {ctor: '[]'}
 																					}),
 																				_1: {
 																					ctor: '::',
 																					_0: A2(
 																						_rtfeldman$elm_css$Css$class,
-																						_user$project$StyleTypes$Col6,
+																						_user$project$StyleTypes$Col7,
 																						{
 																							ctor: '::',
 																							_0: _rtfeldman$elm_css$Css$width(
-																								_rtfeldman$elm_css$Css$pct(50)),
+																								_rtfeldman$elm_css$Css$pct(58.33)),
 																							_1: {ctor: '[]'}
 																						}),
 																					_1: {
 																						ctor: '::',
 																						_0: A2(
 																							_rtfeldman$elm_css$Css$class,
-																							_user$project$StyleTypes$Col7,
+																							_user$project$StyleTypes$Col8,
 																							{
 																								ctor: '::',
 																								_0: _rtfeldman$elm_css$Css$width(
-																									_rtfeldman$elm_css$Css$pct(58.33)),
+																									_rtfeldman$elm_css$Css$pct(66.66)),
 																								_1: {ctor: '[]'}
 																							}),
 																						_1: {
 																							ctor: '::',
 																							_0: A2(
 																								_rtfeldman$elm_css$Css$class,
-																								_user$project$StyleTypes$Col8,
+																								_user$project$StyleTypes$Col9,
 																								{
 																									ctor: '::',
 																									_0: _rtfeldman$elm_css$Css$width(
-																										_rtfeldman$elm_css$Css$pct(66.66)),
+																										_rtfeldman$elm_css$Css$pct(75)),
 																									_1: {ctor: '[]'}
 																								}),
 																							_1: {
 																								ctor: '::',
 																								_0: A2(
 																									_rtfeldman$elm_css$Css$class,
-																									_user$project$StyleTypes$Col9,
+																									_user$project$StyleTypes$Col10,
 																									{
 																										ctor: '::',
 																										_0: _rtfeldman$elm_css$Css$width(
-																											_rtfeldman$elm_css$Css$pct(75)),
+																											_rtfeldman$elm_css$Css$pct(83.33)),
 																										_1: {ctor: '[]'}
 																									}),
 																								_1: {
 																									ctor: '::',
 																									_0: A2(
 																										_rtfeldman$elm_css$Css$class,
-																										_user$project$StyleTypes$Col10,
+																										_user$project$StyleTypes$Col11,
 																										{
 																											ctor: '::',
 																											_0: _rtfeldman$elm_css$Css$width(
-																												_rtfeldman$elm_css$Css$pct(83.33)),
+																												_rtfeldman$elm_css$Css$pct(91.66)),
 																											_1: {ctor: '[]'}
 																										}),
 																									_1: {
 																										ctor: '::',
 																										_0: A2(
 																											_rtfeldman$elm_css$Css$class,
-																											_user$project$StyleTypes$Col11,
+																											_user$project$StyleTypes$Col12,
 																											{
 																												ctor: '::',
 																												_0: _rtfeldman$elm_css$Css$width(
-																													_rtfeldman$elm_css$Css$pct(91.66)),
+																													_rtfeldman$elm_css$Css$pct(100)),
 																												_1: {ctor: '[]'}
 																											}),
 																										_1: {
 																											ctor: '::',
 																											_0: A2(
 																												_rtfeldman$elm_css$Css$class,
-																												_user$project$StyleTypes$Col12,
+																												_user$project$StyleTypes$BottomResult,
 																												{
 																													ctor: '::',
-																													_0: _rtfeldman$elm_css$Css$width(
-																														_rtfeldman$elm_css$Css$pct(100)),
-																													_1: {ctor: '[]'}
+																													_0: A2(
+																														_rtfeldman$elm_css$Css$border2,
+																														_rtfeldman$elm_css$Css$px(1),
+																														_rtfeldman$elm_css$Css$solid),
+																													_1: {
+																														ctor: '::',
+																														_0: _rtfeldman$elm_css$Css$borderColor(
+																															_rtfeldman$elm_css$Css$hex('#DADAA9')),
+																														_1: {
+																															ctor: '::',
+																															_0: _rtfeldman$elm_css$Css$fontSize(
+																																_rtfeldman$elm_css$Css$em(0.5)),
+																															_1: {
+																																ctor: '::',
+																																_0: _rtfeldman$elm_css$Css$backgroundColor(
+																																	_rtfeldman$elm_css$Css$hex('#fff5ee')),
+																																_1: {
+																																	ctor: '::',
+																																	_0: _rtfeldman$elm_css$Css$padding(
+																																		_rtfeldman$elm_css$Css$px(20)),
+																																	_1: {ctor: '[]'}
+																																}
+																															}
+																														}
+																													}
 																												}),
 																											_1: {
 																												ctor: '::',
 																												_0: A2(
 																													_rtfeldman$elm_css$Css$class,
-																													_user$project$StyleTypes$BottomResult,
+																													_user$project$StyleTypes$Rowgrid,
 																													{
 																														ctor: '::',
-																														_0: A2(
-																															_rtfeldman$elm_css$Css$border2,
-																															_rtfeldman$elm_css$Css$px(1),
-																															_rtfeldman$elm_css$Css$solid),
+																														_0: _rtfeldman$elm_css$Css$width(
+																															_rtfeldman$elm_css$Css$pct(100)),
 																														_1: {
 																															ctor: '::',
-																															_0: _rtfeldman$elm_css$Css$borderColor(
-																																_rtfeldman$elm_css$Css$hex('#DADAA9')),
+																															_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$table),
 																															_1: {
 																																ctor: '::',
-																																_0: _rtfeldman$elm_css$Css$fontSize(
-																																	_rtfeldman$elm_css$Css$em(0.5)),
+																																_0: A2(_rtfeldman$elm_css$Css$property, 'table-layout', 'fixed'),
 																																_1: {
 																																	ctor: '::',
-																																	_0: _rtfeldman$elm_css$Css$backgroundColor(
-																																		_rtfeldman$elm_css$Css$hex('#fff5ee')),
-																																	_1: {
-																																		ctor: '::',
-																																		_0: _rtfeldman$elm_css$Css$padding(
-																																			_rtfeldman$elm_css$Css$px(20)),
-																																		_1: {ctor: '[]'}
-																																	}
+																																	_0: _rtfeldman$elm_css$Css$padding(
+																																		_rtfeldman$elm_css$Css$px(2)),
+																																	_1: {ctor: '[]'}
 																																}
 																															}
 																														}
@@ -15781,84 +15752,59 @@ var _user$project$AppStyles$css = function (_p0) {
 																													ctor: '::',
 																													_0: A2(
 																														_rtfeldman$elm_css$Css$class,
-																														_user$project$StyleTypes$Rowgrid,
+																														_user$project$StyleTypes$CRol,
 																														{
 																															ctor: '::',
-																															_0: _rtfeldman$elm_css$Css$width(
-																																_rtfeldman$elm_css$Css$pct(100)),
-																															_1: {
-																																ctor: '::',
-																																_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$table),
-																																_1: {
-																																	ctor: '::',
-																																	_0: A2(_rtfeldman$elm_css$Css$property, 'table-layout', 'fixed'),
-																																	_1: {
-																																		ctor: '::',
-																																		_0: _rtfeldman$elm_css$Css$padding(
-																																			_rtfeldman$elm_css$Css$px(2)),
-																																		_1: {ctor: '[]'}
-																																	}
-																																}
-																															}
+																															_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$tableCell),
+																															_1: {ctor: '[]'}
 																														}),
 																													_1: {
 																														ctor: '::',
 																														_0: A2(
 																															_rtfeldman$elm_css$Css$class,
-																															_user$project$StyleTypes$CRol,
+																															_user$project$StyleTypes$Result,
 																															{
 																																ctor: '::',
-																																_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$tableCell),
-																																_1: {ctor: '[]'}
-																															}),
-																														_1: {
-																															ctor: '::',
-																															_0: A2(
-																																_rtfeldman$elm_css$Css$class,
-																																_user$project$StyleTypes$Result,
-																																{
+																																_0: _rtfeldman$elm_css$Css$margin(
+																																	_rtfeldman$elm_css$Css$px(37)),
+																																_1: {
 																																	ctor: '::',
-																																	_0: _rtfeldman$elm_css$Css$margin(
-																																		_rtfeldman$elm_css$Css$px(37)),
+																																	_0: _rtfeldman$elm_css$Css$backgroundColor(
+																																		_rtfeldman$elm_css$Css$hex('#dadad2')),
 																																	_1: {
 																																		ctor: '::',
-																																		_0: _rtfeldman$elm_css$Css$backgroundColor(
-																																			_rtfeldman$elm_css$Css$hex('#dadad2')),
+																																		_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$block),
 																																		_1: {
 																																			ctor: '::',
-																																			_0: _rtfeldman$elm_css$Css$display(_rtfeldman$elm_css$Css$block),
+																																			_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
 																																			_1: {
 																																				ctor: '::',
-																																				_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
+																																				_0: A2(
+																																					_rtfeldman$elm_css$Css$border2,
+																																					_rtfeldman$elm_css$Css$px(1),
+																																					_rtfeldman$elm_css$Css$solid),
 																																				_1: {
 																																					ctor: '::',
-																																					_0: A2(
-																																						_rtfeldman$elm_css$Css$border2,
-																																						_rtfeldman$elm_css$Css$px(1),
-																																						_rtfeldman$elm_css$Css$solid),
+																																					_0: _rtfeldman$elm_css$Css$borderColor(
+																																						_rtfeldman$elm_css$Css$hex('#DADAA9')),
 																																					_1: {
 																																						ctor: '::',
-																																						_0: _rtfeldman$elm_css$Css$borderColor(
-																																							_rtfeldman$elm_css$Css$hex('#DADAA9')),
+																																						_0: _rtfeldman$elm_css$Css$fontSize(
+																																							_rtfeldman$elm_css$Css$em(1.5)),
 																																						_1: {
 																																							ctor: '::',
-																																							_0: _rtfeldman$elm_css$Css$fontSize(
-																																								_rtfeldman$elm_css$Css$em(1.5)),
-																																							_1: {
-																																								ctor: '::',
-																																								_0: _rtfeldman$elm_css$Css$padding(
-																																									_rtfeldman$elm_css$Css$px(10)),
-																																								_1: {ctor: '[]'}
-																																							}
+																																							_0: _rtfeldman$elm_css$Css$padding(
+																																								_rtfeldman$elm_css$Css$px(10)),
+																																							_1: {ctor: '[]'}
 																																						}
 																																					}
 																																				}
 																																			}
 																																		}
 																																	}
-																																}),
-																															_1: {ctor: '[]'}
-																														}
+																																}
+																															}),
+																														_1: {ctor: '[]'}
 																													}
 																												}
 																											}
@@ -16185,483 +16131,6 @@ var _user$project$Main$_p7 = _user$project$StyleTypes$cssNameSpace;
 var _user$project$Main$id = _user$project$Main$_p7.id;
 var _user$project$Main$class = _user$project$Main$_p7.$class;
 var _user$project$Main$classList = _user$project$Main$_p7.classList;
-var _user$project$Main$SupportedCountry = F4(
-	function (a, b, c, d) {
-		return {country: a, currencySymbol: b, name: c, exchanges: d};
-	});
-var _user$project$Main$supportedCountryDecoder = A5(
-	_elm_lang$core$Json_Decode$map4,
-	_user$project$Main$SupportedCountry,
-	A2(_elm_lang$core$Json_Decode$field, 'country', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'currencySymbol', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'name', _elm_lang$core$Json_Decode$string),
-	A2(
-		_elm_lang$core$Json_Decode$field,
-		'exchanges',
-		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
-var _user$project$Main$supportedCountriesDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$supportedCountryDecoder);
-var _user$project$Main$ArbitrageResponse = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return function (n) {
-														return {spotRate: a, currencyPair: b, amountInSourceCurrency: c, amountInDestinationCurrencyUsingSpotRate: d, numberOfBitcoinsBoughtAtOrigin: e, amountInDestinationCurrencyAfterBitcoinSale: f, exchangeSource: g, exchangeDestination: h, sign: i, percentage: j, sourceHighestBidPrice: k, sourceLowestOfferPrice: l, targetHighestBidPrice: m, targetLowestOfferPrice: n};
-													};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var _user$project$Main$arbitrageResponseDecoder = A2(
-	_elm_lang$core$Json_Decode$at,
-	{
-		ctor: '::',
-		_0: 'data',
-		_1: {ctor: '[]'}
-	},
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'targetLowestOfferPrice',
-		_elm_lang$core$Json_Decode$string,
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'targetHighestBidPrice',
-			_elm_lang$core$Json_Decode$string,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'sourceLowestOfferPrice',
-				_elm_lang$core$Json_Decode$string,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'sourceHighestBidPrice',
-					_elm_lang$core$Json_Decode$string,
-					A3(
-						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-						'percentage',
-						_elm_lang$core$Json_Decode$string,
-						A3(
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-							'sign',
-							_elm_lang$core$Json_Decode$string,
-							A3(
-								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-								'exchangeDestination',
-								_elm_lang$core$Json_Decode$string,
-								A3(
-									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-									'exchangeSource',
-									_elm_lang$core$Json_Decode$string,
-									A3(
-										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-										'amountInDestinationCurrencyAfterBitcoinSale',
-										_elm_lang$core$Json_Decode$string,
-										A3(
-											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-											'numberOfBitcoinsBoughtAtOrigin',
-											_elm_lang$core$Json_Decode$string,
-											A3(
-												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-												'amountInDestinationCurrencyUsingSpotRate',
-												_elm_lang$core$Json_Decode$string,
-												A3(
-													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-													'amountInSourceCurrency',
-													_elm_lang$core$Json_Decode$string,
-													A3(
-														_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-														'currencyPair',
-														_elm_lang$core$Json_Decode$string,
-														A3(
-															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-															'spotRate',
-															_elm_lang$core$Json_Decode$string,
-															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Main$ArbitrageResponse))))))))))))))));
-var _user$project$Main$Model = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return {sourceCountry: a, sourceCurrency: b, sourceExchange: c, targetCountry: d, targetCurrency: e, targetExchange: f, amount: g, sourcePossibleExchanges: h, targetPossibleExchanges: i, countriesList: j, arbitrageResponse: k, waitingResponse: l, errorMessage: m};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var _user$project$Main$InputAmount = function (a) {
-	return {ctor: 'InputAmount', _0: a};
-};
-var _user$project$Main$SelectSourceExchange = {ctor: 'SelectSourceExchange'};
-var _user$project$Main$TargetExchangeSelected = function (a) {
-	return {ctor: 'TargetExchangeSelected', _0: a};
-};
-var _user$project$Main$SourceExchangeSelected = function (a) {
-	return {ctor: 'SourceExchangeSelected', _0: a};
-};
-var _user$project$Main$TargetCountrySelected = function (a) {
-	return {ctor: 'TargetCountrySelected', _0: a};
-};
-var _user$project$Main$SourceCountrySelected = function (a) {
-	return {ctor: 'SourceCountrySelected', _0: a};
-};
-var _user$project$Main$showInputForm = function (model) {
-	var _p8 = model.arbitrageResponse;
-	if (_p8.ctor === 'Nothing') {
-		return _elm_lang$core$Native_Utils.eq(model.waitingResponse, false) ? A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _user$project$Main$class(
-							{
-								ctor: '::',
-								_0: _user$project$StyleTypes$SourceCountry,
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _user$project$Main$class(
-									{
-										ctor: '::',
-										_0: _user$project$StyleTypes$FormLine,
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$span,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Source country: '),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$select,
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html_Events$on,
-												'change',
-												A2(_elm_lang$core$Json_Decode$map, _user$project$Main$SourceCountrySelected, _elm_lang$html$Html_Events$targetValue)),
-											_1: {ctor: '[]'}
-										},
-										A2(
-											_elm_lang$core$List$map,
-											_user$project$Main$countryDDLB,
-											{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _user$project$Main$class(
-										{
-											ctor: '::',
-											_0: _user$project$StyleTypes$FormLine,
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$span,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(
-												A2(_elm_lang$core$Basics_ops['++'], 'Currency: ', model.sourceCurrency)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _user$project$Main$class(
-											{
-												ctor: '::',
-												_0: _user$project$StyleTypes$FormLine,
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$span,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Exchange: '),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$select,
-												{
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html_Events$on,
-														'change',
-														A2(_elm_lang$core$Json_Decode$map, _user$project$Main$SourceExchangeSelected, _elm_lang$html$Html_Events$targetValue)),
-													_1: {ctor: '[]'}
-												},
-												A2(
-													_elm_lang$core$List$map,
-													_user$project$Main$createOptionsForDDLB,
-													_user$project$Main$dealWithEmptyList(model.sourcePossibleExchanges))),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										{
-											ctor: '::',
-											_0: _user$project$Main$class(
-												{
-													ctor: '::',
-													_0: _user$project$StyleTypes$FormLine,
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$span,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Amount: '),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$input,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$type_('text'),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$placeholder('0.00'),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$InputAmount),
-																_1: {
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$value(model.amount),
-																	_1: {ctor: '[]'}
-																}
-															}
-														}
-													},
-													{ctor: '[]'}),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _user$project$Main$class(
-								{
-									ctor: '::',
-									_0: _user$project$StyleTypes$TargetCountry,
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _user$project$Main$class(
-										{
-											ctor: '::',
-											_0: _user$project$StyleTypes$FormLine,
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$span,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Target country: '),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$select,
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html_Events$on,
-													'change',
-													A2(_elm_lang$core$Json_Decode$map, _user$project$Main$TargetCountrySelected, _elm_lang$html$Html_Events$targetValue)),
-												_1: {ctor: '[]'}
-											},
-											A2(
-												_elm_lang$core$List$map,
-												_user$project$Main$countryDDLB,
-												{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _user$project$Main$class(
-											{
-												ctor: '::',
-												_0: _user$project$StyleTypes$FormLine,
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$span,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text(
-													A2(_elm_lang$core$Basics_ops['++'], 'Currency: ', model.targetCurrency)),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										{
-											ctor: '::',
-											_0: _user$project$Main$class(
-												{
-													ctor: '::',
-													_0: _user$project$StyleTypes$FormLine,
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$span,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Exchange: '),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$select,
-													{
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html_Events$on,
-															'change',
-															A2(_elm_lang$core$Json_Decode$map, _user$project$Main$TargetExchangeSelected, _elm_lang$html$Html_Events$targetValue)),
-														_1: {ctor: '[]'}
-													},
-													A2(
-														_elm_lang$core$List$map,
-														_user$project$Main$createOptionsForDDLB,
-														_user$project$Main$dealWithEmptyList(model.targetPossibleExchanges))),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}) : _elm_lang$html$Html$text('');
-	} else {
-		return _elm_lang$html$Html$text('');
-	}
-};
-var _user$project$Main$DetailResponseExpandOrContract = {ctor: 'DetailResponseExpandOrContract'};
 var _user$project$Main$getSignDIV = function (arbitrageResponse) {
 	return _elm_lang$core$Native_Utils.eq(arbitrageResponse.sign, '+') ? A2(
 		_elm_lang$html$Html$div,
@@ -16713,22 +16182,7 @@ var _user$project$Main$getSignDIV = function (arbitrageResponse) {
 							_0: _elm_lang$html$Html$text(arbitrageResponse.percentage),
 							_1: {ctor: '[]'}
 						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$DetailResponseExpandOrContract),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Details'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_1: {ctor: '[]'}
 				}
 			}
 		}) : (_elm_lang$core$Native_Utils.eq(arbitrageResponse.sign, '-') ? A2(
@@ -16781,22 +16235,7 @@ var _user$project$Main$getSignDIV = function (arbitrageResponse) {
 							_0: _elm_lang$html$Html$text(arbitrageResponse.percentage),
 							_1: {ctor: '[]'}
 						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$DetailResponseExpandOrContract),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Details'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_1: {ctor: '[]'}
 				}
 			}
 		}) : A2(
@@ -16805,8 +16244,8 @@ var _user$project$Main$getSignDIV = function (arbitrageResponse) {
 		{ctor: '[]'}));
 };
 var _user$project$Main$showResult = function (model) {
-	var _p9 = model.arbitrageResponse;
-	if (_p9.ctor === 'Nothing') {
+	var _p8 = model.arbitrageResponse;
+	if (_p8.ctor === 'Nothing') {
 		return (!_elm_lang$core$Native_Utils.eq(model.errorMessage, '')) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -17501,6 +16940,483 @@ var _user$project$Main$showResult = function (model) {
 			});
 	}
 };
+var _user$project$Main$SupportedCountry = F4(
+	function (a, b, c, d) {
+		return {country: a, currencySymbol: b, name: c, exchanges: d};
+	});
+var _user$project$Main$supportedCountryDecoder = A5(
+	_elm_lang$core$Json_Decode$map4,
+	_user$project$Main$SupportedCountry,
+	A2(_elm_lang$core$Json_Decode$field, 'country', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'currencySymbol', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'name', _elm_lang$core$Json_Decode$string),
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'exchanges',
+		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+var _user$project$Main$supportedCountriesDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$supportedCountryDecoder);
+var _user$project$Main$ArbitrageResponse = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return {spotRate: a, currencyPair: b, amountInSourceCurrency: c, amountInDestinationCurrencyUsingSpotRate: d, numberOfBitcoinsBoughtAtOrigin: e, amountInDestinationCurrencyAfterBitcoinSale: f, exchangeSource: g, exchangeDestination: h, sign: i, percentage: j, sourceHighestBidPrice: k, sourceLowestOfferPrice: l, targetHighestBidPrice: m, targetLowestOfferPrice: n};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Main$arbitrageResponseDecoder = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'data',
+		_1: {ctor: '[]'}
+	},
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'targetLowestOfferPrice',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'targetHighestBidPrice',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'sourceLowestOfferPrice',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'sourceHighestBidPrice',
+					_elm_lang$core$Json_Decode$string,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'percentage',
+						_elm_lang$core$Json_Decode$string,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'sign',
+							_elm_lang$core$Json_Decode$string,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'exchangeDestination',
+								_elm_lang$core$Json_Decode$string,
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'exchangeSource',
+									_elm_lang$core$Json_Decode$string,
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'amountInDestinationCurrencyAfterBitcoinSale',
+										_elm_lang$core$Json_Decode$string,
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+											'numberOfBitcoinsBoughtAtOrigin',
+											_elm_lang$core$Json_Decode$string,
+											A3(
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+												'amountInDestinationCurrencyUsingSpotRate',
+												_elm_lang$core$Json_Decode$string,
+												A3(
+													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+													'amountInSourceCurrency',
+													_elm_lang$core$Json_Decode$string,
+													A3(
+														_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+														'currencyPair',
+														_elm_lang$core$Json_Decode$string,
+														A3(
+															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+															'spotRate',
+															_elm_lang$core$Json_Decode$string,
+															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Main$ArbitrageResponse))))))))))))))));
+var _user$project$Main$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {sourceCountry: a, sourceCurrency: b, sourceExchange: c, targetCountry: d, targetCurrency: e, targetExchange: f, amount: g, sourcePossibleExchanges: h, targetPossibleExchanges: i, countriesList: j, arbitrageResponse: k, waitingResponse: l, errorMessage: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Main$InputAmount = function (a) {
+	return {ctor: 'InputAmount', _0: a};
+};
+var _user$project$Main$SelectSourceExchange = {ctor: 'SelectSourceExchange'};
+var _user$project$Main$TargetExchangeSelected = function (a) {
+	return {ctor: 'TargetExchangeSelected', _0: a};
+};
+var _user$project$Main$SourceExchangeSelected = function (a) {
+	return {ctor: 'SourceExchangeSelected', _0: a};
+};
+var _user$project$Main$TargetCountrySelected = function (a) {
+	return {ctor: 'TargetCountrySelected', _0: a};
+};
+var _user$project$Main$SourceCountrySelected = function (a) {
+	return {ctor: 'SourceCountrySelected', _0: a};
+};
+var _user$project$Main$showInputForm = function (model) {
+	var _p9 = model.arbitrageResponse;
+	if (_p9.ctor === 'Nothing') {
+		return _elm_lang$core$Native_Utils.eq(model.waitingResponse, false) ? A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _user$project$Main$class(
+							{
+								ctor: '::',
+								_0: _user$project$StyleTypes$SourceCountry,
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _user$project$Main$class(
+									{
+										ctor: '::',
+										_0: _user$project$StyleTypes$FormLine,
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$span,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Source country: '),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$select,
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html_Events$on,
+												'change',
+												A2(_elm_lang$core$Json_Decode$map, _user$project$Main$SourceCountrySelected, _elm_lang$html$Html_Events$targetValue)),
+											_1: {ctor: '[]'}
+										},
+										A2(
+											_elm_lang$core$List$map,
+											_user$project$Main$countryDDLB,
+											{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _user$project$Main$class(
+										{
+											ctor: '::',
+											_0: _user$project$StyleTypes$FormLine,
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(
+												A2(_elm_lang$core$Basics_ops['++'], 'Currency: ', model.sourceCurrency)),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _user$project$Main$class(
+											{
+												ctor: '::',
+												_0: _user$project$StyleTypes$FormLine,
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$span,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Exchange: '),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$select,
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html_Events$on,
+														'change',
+														A2(_elm_lang$core$Json_Decode$map, _user$project$Main$SourceExchangeSelected, _elm_lang$html$Html_Events$targetValue)),
+													_1: {ctor: '[]'}
+												},
+												A2(
+													_elm_lang$core$List$map,
+													_user$project$Main$createOptionsForDDLB,
+													_user$project$Main$dealWithEmptyList(model.sourcePossibleExchanges))),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _user$project$Main$class(
+												{
+													ctor: '::',
+													_0: _user$project$StyleTypes$FormLine,
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Amount: '),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$input,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$type_('text'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$placeholder('0.00'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$InputAmount),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$value(model.amount),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													},
+													{ctor: '[]'}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _user$project$Main$class(
+								{
+									ctor: '::',
+									_0: _user$project$StyleTypes$TargetCountry,
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _user$project$Main$class(
+										{
+											ctor: '::',
+											_0: _user$project$StyleTypes$FormLine,
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Target country: '),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$select,
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html_Events$on,
+													'change',
+													A2(_elm_lang$core$Json_Decode$map, _user$project$Main$TargetCountrySelected, _elm_lang$html$Html_Events$targetValue)),
+												_1: {ctor: '[]'}
+											},
+											A2(
+												_elm_lang$core$List$map,
+												_user$project$Main$countryDDLB,
+												{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _user$project$Main$class(
+											{
+												ctor: '::',
+												_0: _user$project$StyleTypes$FormLine,
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$span,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(_elm_lang$core$Basics_ops['++'], 'Currency: ', model.targetCurrency)),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _user$project$Main$class(
+												{
+													ctor: '::',
+													_0: _user$project$StyleTypes$FormLine,
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Exchange: '),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$select,
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html_Events$on,
+															'change',
+															A2(_elm_lang$core$Json_Decode$map, _user$project$Main$TargetExchangeSelected, _elm_lang$html$Html_Events$targetValue)),
+														_1: {ctor: '[]'}
+													},
+													A2(
+														_elm_lang$core$List$map,
+														_user$project$Main$createOptionsForDDLB,
+														_user$project$Main$dealWithEmptyList(model.targetPossibleExchanges))),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}) : _elm_lang$html$Html$text('');
+	} else {
+		return _elm_lang$html$Html$text('');
+	}
+};
+var _user$project$Main$DetailResponseExpandOrContract = {ctor: 'DetailResponseExpandOrContract'};
 var _user$project$Main$ClearArbitrageResult = {ctor: 'ClearArbitrageResult'};
 var _user$project$Main$FetchArbitrageResult = {ctor: 'FetchArbitrageResult'};
 var _user$project$Main$showButton = function (model) {

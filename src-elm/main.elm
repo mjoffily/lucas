@@ -162,14 +162,14 @@ getSignDIV arbitrageResponse =
             [ Html.img [ Html.Attributes.src "/assets/arrowup.gif", Html.Attributes.height 30, Html.Attributes.width 30] []
             , Html.span [] [ Html.text "Bitcoin is beating spot rate by " ]
             , Html.span [] [ Html.text (arbitrageResponse.percentage) ]
-            , Html.button [onClick DetailResponseExpandOrContract ] [ Html.text "Details"]
+--            , Html.button [onClick DetailResponseExpandOrContract ] [ Html.text "Details"]
             ]
     else if (arbitrageResponse.sign == "-") then
         Html.div [class [ TopResult ] ] 
             [ Html.img [ Html.Attributes.src "/assets/arrowdown.gif", Html.Attributes.height 30, Html.Attributes.width 30] []
             , Html.span [] [ Html.text "Bitcoin is losing to spot rate by " ]
             , Html.span [] [ Html.text arbitrageResponse.percentage ]
-            , Html.button [onClick DetailResponseExpandOrContract ] [ Html.text "Details"]
+--            , Html.button [onClick DetailResponseExpandOrContract ] [ Html.text "Details"]
             ]
     else
         Html.div [] []
