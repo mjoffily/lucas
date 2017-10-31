@@ -26,39 +26,55 @@ var _user$project$Main$errorMessageDecoder = A2(
 		}
 	},
 	_elm_lang$core$Json_Decode$string);
-var _user$project$Main$countryDDLB = function (supportedCountry) {
-	return _elm_lang$core$Native_Utils.eq(supportedCountry.country, '') ? A2(
-		_elm_lang$html$Html$option,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$selected(true),
-			_1: {
+var _user$project$Main$countryDDLB = F3(
+	function (errorMessage, currentlySelectedCountry, supportedCountry) {
+		return ((!_elm_lang$core$Native_Utils.eq(errorMessage, '')) && (_elm_lang$core$Native_Utils.eq(supportedCountry.country, currentlySelectedCountry) && (!_elm_lang$core$Native_Utils.eq(supportedCountry.country, '')))) ? A2(
+			_elm_lang$html$Html$option,
+			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
-				_1: {ctor: '[]'}
-			}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text('-- select --'),
-			_1: {ctor: '[]'}
-		}) : A2(
-		_elm_lang$html$Html$option,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$selected(false),
-			_1: {
+				_0: _elm_lang$html$Html_Attributes$selected(true),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
+				_0: _elm_lang$html$Html$text(supportedCountry.country),
 				_1: {ctor: '[]'}
-			}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(supportedCountry.country),
-			_1: {ctor: '[]'}
-		});
-};
+			}) : (_elm_lang$core$Native_Utils.eq(supportedCountry.country, '') ? A2(
+			_elm_lang$html$Html$option,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$selected(false),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('-- select --'),
+				_1: {ctor: '[]'}
+			}) : A2(
+			_elm_lang$html$Html$option,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$selected(false),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(supportedCountry.country),
+				_1: {ctor: '[]'}
+			}));
+	});
 var _user$project$Main$showSpinner = function (model) {
 	var _p2 = model.waitingResponse;
 	if (_p2 === true) {
@@ -129,13 +145,9 @@ var _user$project$Main$showSpinner = function (model) {
 		return _elm_lang$html$Html$text('');
 	}
 };
-var _user$project$Main$createOptionsForDDLB = function (exchange) {
-	return _elm_lang$core$Native_Utils.eq(
-		A2(_elm_lang$core$Debug$log, 'The exchange ', exchange),
-		'') ? A2(
-		_elm_lang$core$Debug$log,
-		'SELECTED TRUE',
-		A2(
+var _user$project$Main$createOptionsForDDLB = F3(
+	function (errorMessage, currentlySelectedExchange, exchange) {
+		return ((!_elm_lang$core$Native_Utils.eq(errorMessage, '')) && (_elm_lang$core$Native_Utils.eq(exchange, currentlySelectedExchange) && (!_elm_lang$core$Native_Utils.eq(exchange, '')))) ? A2(
 			_elm_lang$html$Html$option,
 			{
 				ctor: '::',
@@ -148,12 +160,24 @@ var _user$project$Main$createOptionsForDDLB = function (exchange) {
 			},
 			{
 				ctor: '::',
+				_0: _elm_lang$html$Html$text(exchange),
+				_1: {ctor: '[]'}
+			}) : (_elm_lang$core$Native_Utils.eq(exchange, '') ? A2(
+			_elm_lang$html$Html$option,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$selected(false),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(exchange),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
 				_0: _elm_lang$html$Html$text('-- select --'),
 				_1: {ctor: '[]'}
-			})) : A2(
-		_elm_lang$core$Debug$log,
-		'SELECTED false',
-		A2(
+			}) : A2(
 			_elm_lang$html$Html$option,
 			{
 				ctor: '::',
@@ -169,7 +193,7 @@ var _user$project$Main$createOptionsForDDLB = function (exchange) {
 				_0: _elm_lang$html$Html$text(exchange),
 				_1: {ctor: '[]'}
 			}));
-};
+	});
 var _user$project$Main$concatSymbolAndName = function (countryRecord) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
@@ -294,483 +318,6 @@ var _user$project$Main$_p7 = _user$project$StyleTypes$cssNameSpace;
 var _user$project$Main$id = _user$project$Main$_p7.id;
 var _user$project$Main$class = _user$project$Main$_p7.$class;
 var _user$project$Main$classList = _user$project$Main$_p7.classList;
-var _user$project$Main$SupportedCountry = F4(
-	function (a, b, c, d) {
-		return {country: a, currencySymbol: b, name: c, exchanges: d};
-	});
-var _user$project$Main$supportedCountryDecoder = A5(
-	_elm_lang$core$Json_Decode$map4,
-	_user$project$Main$SupportedCountry,
-	A2(_elm_lang$core$Json_Decode$field, 'country', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'currencySymbol', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'name', _elm_lang$core$Json_Decode$string),
-	A2(
-		_elm_lang$core$Json_Decode$field,
-		'exchanges',
-		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
-var _user$project$Main$supportedCountriesDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$supportedCountryDecoder);
-var _user$project$Main$ArbitrageResponse = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return function (n) {
-														return {spotRate: a, currencyPair: b, amountInSourceCurrency: c, amountInDestinationCurrencyUsingSpotRate: d, numberOfBitcoinsBoughtAtOrigin: e, amountInDestinationCurrencyAfterBitcoinSale: f, exchangeSource: g, exchangeDestination: h, sign: i, percentage: j, sourceHighestBidPrice: k, sourceLowestOfferPrice: l, targetHighestBidPrice: m, targetLowestOfferPrice: n};
-													};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var _user$project$Main$arbitrageResponseDecoder = A2(
-	_elm_lang$core$Json_Decode$at,
-	{
-		ctor: '::',
-		_0: 'data',
-		_1: {ctor: '[]'}
-	},
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'targetLowestOfferPrice',
-		_elm_lang$core$Json_Decode$string,
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'targetHighestBidPrice',
-			_elm_lang$core$Json_Decode$string,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'sourceLowestOfferPrice',
-				_elm_lang$core$Json_Decode$string,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'sourceHighestBidPrice',
-					_elm_lang$core$Json_Decode$string,
-					A3(
-						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-						'percentage',
-						_elm_lang$core$Json_Decode$string,
-						A3(
-							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-							'sign',
-							_elm_lang$core$Json_Decode$string,
-							A3(
-								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-								'exchangeDestination',
-								_elm_lang$core$Json_Decode$string,
-								A3(
-									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-									'exchangeSource',
-									_elm_lang$core$Json_Decode$string,
-									A3(
-										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-										'amountInDestinationCurrencyAfterBitcoinSale',
-										_elm_lang$core$Json_Decode$string,
-										A3(
-											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-											'numberOfBitcoinsBoughtAtOrigin',
-											_elm_lang$core$Json_Decode$string,
-											A3(
-												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-												'amountInDestinationCurrencyUsingSpotRate',
-												_elm_lang$core$Json_Decode$string,
-												A3(
-													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-													'amountInSourceCurrency',
-													_elm_lang$core$Json_Decode$string,
-													A3(
-														_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-														'currencyPair',
-														_elm_lang$core$Json_Decode$string,
-														A3(
-															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-															'spotRate',
-															_elm_lang$core$Json_Decode$string,
-															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Main$ArbitrageResponse))))))))))))))));
-var _user$project$Main$Model = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return {sourceCountry: a, sourceCurrency: b, sourceExchange: c, targetCountry: d, targetCurrency: e, targetExchange: f, amount: g, sourcePossibleExchanges: h, targetPossibleExchanges: i, countriesList: j, arbitrageResponse: k, waitingResponse: l, errorMessage: m};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var _user$project$Main$InputAmount = function (a) {
-	return {ctor: 'InputAmount', _0: a};
-};
-var _user$project$Main$SelectSourceExchange = {ctor: 'SelectSourceExchange'};
-var _user$project$Main$TargetExchangeSelected = function (a) {
-	return {ctor: 'TargetExchangeSelected', _0: a};
-};
-var _user$project$Main$SourceExchangeSelected = function (a) {
-	return {ctor: 'SourceExchangeSelected', _0: a};
-};
-var _user$project$Main$TargetCountrySelected = function (a) {
-	return {ctor: 'TargetCountrySelected', _0: a};
-};
-var _user$project$Main$SourceCountrySelected = function (a) {
-	return {ctor: 'SourceCountrySelected', _0: a};
-};
-var _user$project$Main$showInputForm = function (model) {
-	var _p8 = model.arbitrageResponse;
-	if (_p8.ctor === 'Nothing') {
-		return _elm_lang$core$Native_Utils.eq(model.waitingResponse, false) ? A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _user$project$Main$class(
-							{
-								ctor: '::',
-								_0: _user$project$StyleTypes$SourceCountry,
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _user$project$Main$class(
-									{
-										ctor: '::',
-										_0: _user$project$StyleTypes$FormLine,
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$span,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Source country: '),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$select,
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html_Events$on,
-												'change',
-												A2(_elm_lang$core$Json_Decode$map, _user$project$Main$SourceCountrySelected, _elm_lang$html$Html_Events$targetValue)),
-											_1: {ctor: '[]'}
-										},
-										A2(
-											_elm_lang$core$List$map,
-											_user$project$Main$countryDDLB,
-											{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _user$project$Main$class(
-										{
-											ctor: '::',
-											_0: _user$project$StyleTypes$FormLine,
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$span,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(
-												A2(_elm_lang$core$Basics_ops['++'], 'Currency: ', model.sourceCurrency)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _user$project$Main$class(
-											{
-												ctor: '::',
-												_0: _user$project$StyleTypes$FormLine,
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$span,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Exchange: '),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$select,
-												{
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html_Events$on,
-														'change',
-														A2(_elm_lang$core$Json_Decode$map, _user$project$Main$SourceExchangeSelected, _elm_lang$html$Html_Events$targetValue)),
-													_1: {ctor: '[]'}
-												},
-												A2(
-													_elm_lang$core$List$map,
-													_user$project$Main$createOptionsForDDLB,
-													_user$project$Main$dealWithEmptyList(model.sourcePossibleExchanges))),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										{
-											ctor: '::',
-											_0: _user$project$Main$class(
-												{
-													ctor: '::',
-													_0: _user$project$StyleTypes$FormLine,
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$span,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Amount: '),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$input,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$type_('text'),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$placeholder('0.00'),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$InputAmount),
-																_1: {
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$value(model.amount),
-																	_1: {ctor: '[]'}
-																}
-															}
-														}
-													},
-													{ctor: '[]'}),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _user$project$Main$class(
-								{
-									ctor: '::',
-									_0: _user$project$StyleTypes$TargetCountry,
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _user$project$Main$class(
-										{
-											ctor: '::',
-											_0: _user$project$StyleTypes$FormLine,
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$span,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Target country: '),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$select,
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html_Events$on,
-													'change',
-													A2(_elm_lang$core$Json_Decode$map, _user$project$Main$TargetCountrySelected, _elm_lang$html$Html_Events$targetValue)),
-												_1: {ctor: '[]'}
-											},
-											A2(
-												_elm_lang$core$List$map,
-												_user$project$Main$countryDDLB,
-												{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _user$project$Main$class(
-											{
-												ctor: '::',
-												_0: _user$project$StyleTypes$FormLine,
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$span,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text(
-													A2(_elm_lang$core$Basics_ops['++'], 'Currency: ', model.targetCurrency)),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										{
-											ctor: '::',
-											_0: _user$project$Main$class(
-												{
-													ctor: '::',
-													_0: _user$project$StyleTypes$FormLine,
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$span,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Exchange: '),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$select,
-													{
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html_Events$on,
-															'change',
-															A2(_elm_lang$core$Json_Decode$map, _user$project$Main$TargetExchangeSelected, _elm_lang$html$Html_Events$targetValue)),
-														_1: {ctor: '[]'}
-													},
-													A2(
-														_elm_lang$core$List$map,
-														_user$project$Main$createOptionsForDDLB,
-														_user$project$Main$dealWithEmptyList(model.targetPossibleExchanges))),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}) : _elm_lang$html$Html$text('');
-	} else {
-		return _elm_lang$html$Html$text('');
-	}
-};
-var _user$project$Main$DetailResponseExpandOrContract = {ctor: 'DetailResponseExpandOrContract'};
 var _user$project$Main$getSignDIV = function (arbitrageResponse) {
 	return _elm_lang$core$Native_Utils.eq(arbitrageResponse.sign, '+') ? A2(
 		_elm_lang$html$Html$div,
@@ -822,22 +369,7 @@ var _user$project$Main$getSignDIV = function (arbitrageResponse) {
 							_0: _elm_lang$html$Html$text(arbitrageResponse.percentage),
 							_1: {ctor: '[]'}
 						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$DetailResponseExpandOrContract),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Details'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_1: {ctor: '[]'}
 				}
 			}
 		}) : (_elm_lang$core$Native_Utils.eq(arbitrageResponse.sign, '-') ? A2(
@@ -890,22 +422,7 @@ var _user$project$Main$getSignDIV = function (arbitrageResponse) {
 							_0: _elm_lang$html$Html$text(arbitrageResponse.percentage),
 							_1: {ctor: '[]'}
 						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$DetailResponseExpandOrContract),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Details'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_1: {ctor: '[]'}
 				}
 			}
 		}) : A2(
@@ -914,8 +431,8 @@ var _user$project$Main$getSignDIV = function (arbitrageResponse) {
 		{ctor: '[]'}));
 };
 var _user$project$Main$showResult = function (model) {
-	var _p9 = model.arbitrageResponse;
-	if (_p9.ctor === 'Nothing') {
+	var _p8 = model.arbitrageResponse;
+	if (_p8.ctor === 'Nothing') {
 		return (!_elm_lang$core$Native_Utils.eq(model.errorMessage, '')) ? A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -1610,6 +1127,495 @@ var _user$project$Main$showResult = function (model) {
 			});
 	}
 };
+var _user$project$Main$SupportedCountry = F4(
+	function (a, b, c, d) {
+		return {country: a, currencySymbol: b, name: c, exchanges: d};
+	});
+var _user$project$Main$supportedCountryDecoder = A5(
+	_elm_lang$core$Json_Decode$map4,
+	_user$project$Main$SupportedCountry,
+	A2(_elm_lang$core$Json_Decode$field, 'country', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'currencySymbol', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'name', _elm_lang$core$Json_Decode$string),
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'exchanges',
+		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+var _user$project$Main$supportedCountriesDecoder = _elm_lang$core$Json_Decode$list(_user$project$Main$supportedCountryDecoder);
+var _user$project$Main$ArbitrageResponse = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return {spotRate: a, currencyPair: b, amountInSourceCurrency: c, amountInDestinationCurrencyUsingSpotRate: d, numberOfBitcoinsBoughtAtOrigin: e, amountInDestinationCurrencyAfterBitcoinSale: f, exchangeSource: g, exchangeDestination: h, sign: i, percentage: j, sourceHighestBidPrice: k, sourceLowestOfferPrice: l, targetHighestBidPrice: m, targetLowestOfferPrice: n};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Main$arbitrageResponseDecoder = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'data',
+		_1: {ctor: '[]'}
+	},
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'targetLowestOfferPrice',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'targetHighestBidPrice',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'sourceLowestOfferPrice',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'sourceHighestBidPrice',
+					_elm_lang$core$Json_Decode$string,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'percentage',
+						_elm_lang$core$Json_Decode$string,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'sign',
+							_elm_lang$core$Json_Decode$string,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'exchangeDestination',
+								_elm_lang$core$Json_Decode$string,
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'exchangeSource',
+									_elm_lang$core$Json_Decode$string,
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'amountInDestinationCurrencyAfterBitcoinSale',
+										_elm_lang$core$Json_Decode$string,
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+											'numberOfBitcoinsBoughtAtOrigin',
+											_elm_lang$core$Json_Decode$string,
+											A3(
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+												'amountInDestinationCurrencyUsingSpotRate',
+												_elm_lang$core$Json_Decode$string,
+												A3(
+													_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+													'amountInSourceCurrency',
+													_elm_lang$core$Json_Decode$string,
+													A3(
+														_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+														'currencyPair',
+														_elm_lang$core$Json_Decode$string,
+														A3(
+															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+															'spotRate',
+															_elm_lang$core$Json_Decode$string,
+															_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Main$ArbitrageResponse))))))))))))))));
+var _user$project$Main$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {sourceCountry: a, sourceCurrency: b, sourceExchange: c, targetCountry: d, targetCurrency: e, targetExchange: f, amount: g, sourcePossibleExchanges: h, targetPossibleExchanges: i, countriesList: j, arbitrageResponse: k, waitingResponse: l, errorMessage: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Main$InputAmount = function (a) {
+	return {ctor: 'InputAmount', _0: a};
+};
+var _user$project$Main$SelectSourceExchange = {ctor: 'SelectSourceExchange'};
+var _user$project$Main$TargetExchangeSelected = function (a) {
+	return {ctor: 'TargetExchangeSelected', _0: a};
+};
+var _user$project$Main$SourceExchangeSelected = function (a) {
+	return {ctor: 'SourceExchangeSelected', _0: a};
+};
+var _user$project$Main$TargetCountrySelected = function (a) {
+	return {ctor: 'TargetCountrySelected', _0: a};
+};
+var _user$project$Main$SourceCountrySelected = function (a) {
+	return {ctor: 'SourceCountrySelected', _0: a};
+};
+var _user$project$Main$showInputForm = function (model) {
+	var _p9 = model.arbitrageResponse;
+	if (_p9.ctor === 'Nothing') {
+		return _elm_lang$core$Native_Utils.eq(model.waitingResponse, false) ? A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _user$project$Main$class(
+							{
+								ctor: '::',
+								_0: _user$project$StyleTypes$SourceCountry,
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _user$project$Main$class(
+									{
+										ctor: '::',
+										_0: _user$project$StyleTypes$FormLine,
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$span,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Source country: '),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$select,
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html_Events$on,
+												'change',
+												A2(_elm_lang$core$Json_Decode$map, _user$project$Main$SourceCountrySelected, _elm_lang$html$Html_Events$targetValue)),
+											_1: {ctor: '[]'}
+										},
+										A2(
+											_elm_lang$core$List$map,
+											A2(
+												_user$project$Main$countryDDLB,
+												model.errorMessage,
+												_user$project$Main$toEmpty(model.sourceCountry)),
+											{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _user$project$Main$class(
+										{
+											ctor: '::',
+											_0: _user$project$StyleTypes$FormLine,
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(
+												A2(_elm_lang$core$Basics_ops['++'], 'Currency: ', model.sourceCurrency)),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _user$project$Main$class(
+											{
+												ctor: '::',
+												_0: _user$project$StyleTypes$FormLine,
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$span,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Exchange: '),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$select,
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html_Events$on,
+														'change',
+														A2(_elm_lang$core$Json_Decode$map, _user$project$Main$SourceExchangeSelected, _elm_lang$html$Html_Events$targetValue)),
+													_1: {ctor: '[]'}
+												},
+												A2(
+													_elm_lang$core$List$map,
+													A2(
+														_user$project$Main$createOptionsForDDLB,
+														model.errorMessage,
+														_user$project$Main$toEmpty(model.sourceExchange)),
+													_user$project$Main$dealWithEmptyList(model.sourcePossibleExchanges))),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _user$project$Main$class(
+												{
+													ctor: '::',
+													_0: _user$project$StyleTypes$FormLine,
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Amount: '),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$input,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$type_('text'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$placeholder('0.00'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$InputAmount),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$value(model.amount),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													},
+													{ctor: '[]'}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _user$project$Main$class(
+								{
+									ctor: '::',
+									_0: _user$project$StyleTypes$TargetCountry,
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _user$project$Main$class(
+										{
+											ctor: '::',
+											_0: _user$project$StyleTypes$FormLine,
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Target country: '),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$select,
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html_Events$on,
+													'change',
+													A2(_elm_lang$core$Json_Decode$map, _user$project$Main$TargetCountrySelected, _elm_lang$html$Html_Events$targetValue)),
+												_1: {ctor: '[]'}
+											},
+											A2(
+												_elm_lang$core$List$map,
+												A2(
+													_user$project$Main$countryDDLB,
+													model.errorMessage,
+													_user$project$Main$toEmpty(model.targetCountry)),
+												{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _user$project$Main$class(
+											{
+												ctor: '::',
+												_0: _user$project$StyleTypes$FormLine,
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$span,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(_elm_lang$core$Basics_ops['++'], 'Currency: ', model.targetCurrency)),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _user$project$Main$class(
+												{
+													ctor: '::',
+													_0: _user$project$StyleTypes$FormLine,
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Exchange: '),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$select,
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html_Events$on,
+															'change',
+															A2(_elm_lang$core$Json_Decode$map, _user$project$Main$TargetExchangeSelected, _elm_lang$html$Html_Events$targetValue)),
+														_1: {ctor: '[]'}
+													},
+													A2(
+														_elm_lang$core$List$map,
+														A2(
+															_user$project$Main$createOptionsForDDLB,
+															model.errorMessage,
+															_user$project$Main$toEmpty(model.targetExchange)),
+														_user$project$Main$dealWithEmptyList(model.targetPossibleExchanges))),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}) : _elm_lang$html$Html$text('');
+	} else {
+		return _elm_lang$html$Html$text('');
+	}
+};
+var _user$project$Main$DetailResponseExpandOrContract = {ctor: 'DetailResponseExpandOrContract'};
 var _user$project$Main$ClearArbitrageResult = {ctor: 'ClearArbitrageResult'};
 var _user$project$Main$FetchArbitrageResult = {ctor: 'FetchArbitrageResult'};
 var _user$project$Main$showButton = function (model) {
@@ -1859,7 +1865,7 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{arbitrageResponse: _elm_lang$core$Maybe$Nothing}),
+						{sourceCountry: _elm_lang$core$Maybe$Nothing, sourceCurrency: '', sourceExchange: _elm_lang$core$Maybe$Nothing, targetCountry: _elm_lang$core$Maybe$Nothing, targetCurrency: '', targetExchange: _elm_lang$core$Maybe$Nothing, amount: '1000.00', arbitrageResponse: _elm_lang$core$Maybe$Nothing, waitingResponse: false, errorMessage: ''}),
 					{ctor: '[]'});
 			default:
 				return A2(

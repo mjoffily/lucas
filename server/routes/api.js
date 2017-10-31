@@ -5,7 +5,7 @@ const express = require('express');
 const axios = require('axios');
 var utils = require('./api.utils');
 var exchanges = require('./api.exchanges');
-
+var conn = require('./api.connect');
 
 const router = express.Router();
 
@@ -31,17 +31,7 @@ const COUNTRIES = {'Australia': {'country': 'Australia', 'currencySymbol': 'AUD'
 const API = 'https://angular2test-mjoffily.c9users.io:8080';
 /* GET api listing. */
 
-
-function findExchange(arr, name) {
-  for (var i in arr) {
-     if (i['name'] === name) {
-       return i['method'];
-     } 
-  }
-  return null;
-}
-//var fs = Promise.promisifyAll(require('fs'));
-
+console.log = function() {}
 
 
 function isSupportedCountry(country, callback) {
@@ -57,6 +47,14 @@ function isSupportedCountry(country, callback) {
 
 function getExchangeRate(sourceCountry, targetCountry, callback) {
   return new Promise(function (resolve, reject) {  
+    if (sourceCountry == targetCountry) {
+      resolve({ exchangeRate: 1
+              , rateAgeInMinutes: 0
+              , retrievedFrom: "local"
+              });
+      return;
+    }
+
   // Check if the source country is supported
     isSupportedCountry(sourceCountry, (err, supported) => {
       if (!supported) {
@@ -249,8 +247,43 @@ router.get('/exchange/coinbase', (req, res) => {
         })
 });
 
+router.get('/request-list', (req, res) => {
+  var minutes = req.query.minutes
+  if (! minutes) {
+    minutes = 10;
+  }
+  
+  conn.showRequests(minutes).then(function(data) {
+    res.status(200).json(data);
+    return;
+  })
+  .catch(function(error) {
+    res.status(500).send(error);
+    return;
+    
+  })
+  
+});
+
+function format2(currency, n) {
+  return new Promise(function (resolve, reject) {
+    if (!currency) {
+      currency = "";
+    }
+//    console.log("this is n: " + n + " typeof n: " + typeof n);
+    resolve(currency + " " + parseFloat(n).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,"));
+  })
+}
+
 router.get('/arbitrage', (req, res) => {
-  console.log(req.query);
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  conn.saveRequest(req.query, req.headers, ip).then(function() {
+    console.log("Request saved");
+  })
+  .catch(function(error) {
+    console.log("/arbitrage - ERROR saving request to database " + error);
+  });
+  // console.log(req.query);
   if ( (!req.query.sourceCountry) || (!COUNTRIES[req.query.sourceCountry]) ) {
     res.status(400).send({data: [], error: {code: 400, message: 'source country is blank or not supported '}});
     return;
@@ -295,82 +328,88 @@ router.get('/arbitrage', (req, res) => {
   var amountAtSpotRate = baseAmount;
   
 
-  var sourceBTCMarketPrice = 0.0;
-  var targetBTCMarketPrice = 0.0;
   var numberOfBitcoinsBoughtAtOrigin = 0;
   var amountInDestinationCurrencyAfterSale = 0.0;
   
-  exchanges.EXCHANGES[sourceExchange]((err, data) => {
-    if (err) {
+  var promises = [];
+  promises[0] = exchanges.EXCHANGES[sourceExchange]();
+  promises[1] = exchanges.EXCHANGES[targetExchange]();
+  promises[2] = getExchangeRate(sourceCountry, targetCountry);
+  
+  Promise.all(promises)
+  .then(results => {
+    var sourceBTCMarketPrice = results[0];
+    var targetBTCMarketPrice = results[1];
+    var exchangeRateObj = results[2];
+    console.log("results: " + JSON.stringify(results, null, 2));
+    
+    numberOfBitcoinsBoughtAtOrigin = baseAmount / sourceBTCMarketPrice['currentLowestOfferPrice'];
+    console.log('Number of bitcoins bought at source ' +  numberOfBitcoinsBoughtAtOrigin);
+
+    amountInDestinationCurrencyAfterSale = numberOfBitcoinsBoughtAtOrigin * targetBTCMarketPrice['currentHighestBidPrice']
+    console.log('Amount after bitcoin sale in target country ' +  amountInDestinationCurrencyAfterSale);
+    
+    var formatPromises = [];
+    var r = {}
+    r['currencyPair'] = COUNTRIES[sourceCountry].currencySymbol + "/" + COUNTRIES[targetCountry].currencySymbol;
+    r['numberOfBitcoinsBoughtAtOrigin'] = parseFloat(numberOfBitcoinsBoughtAtOrigin).toFixed(8);
+    r['exchangeSource'] = sourceExchange;
+    r['exchangeDestination'] = targetExchange;
+    formatPromises[0] = format2(COUNTRIES[sourceCountry].currencySymbol, baseAmount);
+    formatPromises[1] = format2(COUNTRIES[targetCountry].currencySymbol, amountAtSpotRate)
+    formatPromises[2] = format2(COUNTRIES[targetCountry].currencySymbol, amountInDestinationCurrencyAfterSale)
+    formatPromises[3] = format2(COUNTRIES[sourceCountry].currencySymbol, sourceBTCMarketPrice['currentHighestBidPrice'])
+    formatPromises[4] = format2(COUNTRIES[sourceCountry].currencySymbol, sourceBTCMarketPrice['currentLowestOfferPrice'])
+    formatPromises[5] = format2(COUNTRIES[targetCountry].currencySymbol, targetBTCMarketPrice['currentHighestBidPrice'])
+    formatPromises[6] = format2(COUNTRIES[targetCountry].currencySymbol,  targetBTCMarketPrice['currentLowestOfferPrice'])
+
+//    r['sign'] = "";
+//    r['percentage'] = "";
+//    r['rateAgeInMinutes'] = "";
+//    r['rateRetrievedFrom'] = "";
+//    r['amountInDestinationCurrencyUsingSpotRate'] = "";
+
+    console.log('this is the rate: ' + JSON.stringify(exchangeRateObj, null, 2));
+    amountAtSpotRate = baseAmount * exchangeRateObj.exchangeRate;
+    formatPromises[7] = format2(COUNTRIES[targetCountry].currencySymbol, amountAtSpotRate);
+    Promise.all(formatPromises).then(formatResults => {
+      r['amountInSourceCurrency'] = formatResults[0];
+      r['amountInDestinationCurrencyUsingSpotRate'] = formatResults[1];
+      r['amountInDestinationCurrencyAfterBitcoinSale'] = formatResults[2];
+      r['sourceHighestBidPrice'] = formatResults[3];;
+      r['sourceLowestOfferPrice'] = formatResults[4];
+      r['targetHighestBidPrice'] = formatResults[5];
+      r['targetLowestOfferPrice'] = formatResults[6];
+      r['amountInDestinationCurrencyUsingSpotRate'] = formatResults[7];
+
+      console.log("amountInDestinationCurrencyAfterSale: " + amountInDestinationCurrencyAfterSale);
+      console.log("amountAtSpotRate: " + amountAtSpotRate);
+      if (amountInDestinationCurrencyAfterSale > amountAtSpotRate) {
+        r['sign'] = '+';
+        r['percentage'] = parseFloat((amountInDestinationCurrencyAfterSale - amountAtSpotRate) / amountAtSpotRate * 100).toFixed(2) + "%";
+      } else {
+        r['sign'] = '-';
+        r['percentage'] = parseFloat((amountAtSpotRate - amountInDestinationCurrencyAfterSale) / amountInDestinationCurrencyAfterSale * 100).toFixed(2) + "%";
+      }
+      r['spotRate'] = parseFloat(exchangeRateObj.exchangeRate).toFixed(3);
+      r['rateAgeInMinutes'] = exchangeRateObj.rateAgeInMinutes;
+      r['rateRetrievedFrom'] = exchangeRateObj.retrievedFrom;
+      res.status(200).send({data: r});
+    })
+    .catch(err => {
+      console.log('This is the error: ' + err.message);
       res.status(500).send(err.message);
       return;
-    } else {
-      sourceBTCMarketPrice = data;
-      numberOfBitcoinsBoughtAtOrigin = baseAmount / sourceBTCMarketPrice['currentLowestOfferPrice'];
-      console.log('Number of bitcoins bought at source ' +  numberOfBitcoinsBoughtAtOrigin);
-      var exchange = findExchange()
-      exchanges.EXCHANGES[targetExchange]((err, data) => {
-        if (err) {
-          res.status(500).send('Error retrieving bitcoin price at target exchange ' + err.message);
-          return;
-        } else {
-          targetBTCMarketPrice = data;
-          amountInDestinationCurrencyAfterSale = numberOfBitcoinsBoughtAtOrigin * targetBTCMarketPrice['currentHighestBidPrice']
-          console.log('Amount after bitcoin sale in target country ' +  amountInDestinationCurrencyAfterSale);
+    });
+    
 
-          var r = {}
-          r['spotRate'] = parseFloat(exchangeRate).toFixed(3) + "%";
-          r['currencyPair'] = COUNTRIES[sourceCountry].currencySymbol + "/" + COUNTRIES[targetCountry].currencySymbol;
-          r['amountInSourceCurrency'] = COUNTRIES[sourceCountry].currencySymbol + " " + parseFloat(baseAmount).toFixed(2);
-          r['amountInDestinationCurrencyUsingSpotRate'] = COUNTRIES[targetCountry].currencySymbol + " " + parseFloat(amountAtSpotRate).toFixed(2);
-          r['numberOfBitcoinsBoughtAtOrigin'] = parseFloat(numberOfBitcoinsBoughtAtOrigin).toFixed(8);
-          r['amountInDestinationCurrencyAfterBitcoinSale'] = COUNTRIES[targetCountry].currencySymbol + " " + parseFloat(amountInDestinationCurrencyAfterSale).toFixed(2);
-          r['exchangeSource'] = sourceExchange;
-          r['exchangeDestination'] = targetExchange;
-          r['sourceHighestBidPrice'] = parseFloat(sourceBTCMarketPrice['currentHighestBidPrice']).toFixed(2);
-          r['sourceLowestOfferPrice'] = parseFloat(sourceBTCMarketPrice['currentLowestOfferPrice']).toFixed(2);
-          r['targetHighestBidPrice'] = parseFloat(targetBTCMarketPrice['currentHighestBidPrice']).toFixed(2);
-          r['targetLowestOfferPrice'] = parseFloat(targetBTCMarketPrice['currentLowestOfferPrice']).toFixed(2);
-          r['sign'] = "";
-          r['percentage'] = "";
-          r['rateAgeInMinutes'] = "";
-          r['rateRetrievedFrom'] = "";
-          r['amountInDestinationCurrencyUsingSpotRate'] = "";
-          
-          if (sourceCountry !== targetCountry) {
-            
-            getExchangeRate(sourceCountry, targetCountry)
-            .then(function(exchangeRateObj) {
-                console.log('this is the rate: ' + JSON.stringify(exchangeRateObj, null, 2));
-                amountAtSpotRate = baseAmount * exchangeRateObj.exchangeRate;
-                if (amountInDestinationCurrencyAfterSale > amountAtSpotRate) {
-                  r['sign'] = '+';
-                  r['percentage'] = parseFloat((amountInDestinationCurrencyAfterSale - amountAtSpotRate) / amountAtSpotRate * 100).toFixed(2) + "%";
-                } else {
-                  r['sign'] = '-';
-                  r['percentage'] = parseFloat((amountAtSpotRate - amountInDestinationCurrencyAfterSale) / amountInDestinationCurrencyAfterSale * 100).toFixed(2) + "%";
-                }
-                r['spotRate'] = parseFloat(exchangeRateObj.exchangeRate).toFixed(3);
-                r['rateAgeInMinutes'] = exchangeRateObj.rateAgeInMinutes;
-                r['rateRetrievedFrom'] = exchangeRateObj.retrievedFrom;
-                r['amountInDestinationCurrencyUsingSpotRate'] = COUNTRIES[targetCountry].currencySymbol + " " + parseFloat(amountAtSpotRate).toFixed(2);
-                res.status(200).send({data: r});
-            })
-            .catch(function(err) {
-              console.log('This is the error: ' + err.message);
-              res.status(400).send({data: [], error: {code: 400, message: err.message}});
-            });
-          } else {
-            res.status(200).json({data: r});
-          }
-        }
-      });
-    }
+  })
+  .catch(err => {
+    console.log('This is the error: ' + err.message);
+    res.status(500).send(err.message);
+    return;
   });
   
-  
-    
-    
 //     print('Google RESULT: {%s}-->{%s} = {%f}'% (source_currency, target_currency, amount_in_target_currency))
 //     print('Bitcoin RESULT: {%f} ' % (amount_in_destination_currency_after_sale))
     

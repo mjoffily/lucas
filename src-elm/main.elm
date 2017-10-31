@@ -148,12 +148,19 @@ getCurrencyForCountry country list =
     |> dealWithEmptyString 
 
                     
-createOptionsForDDLB : String -> Html msg
-createOptionsForDDLB exchange =
-    if (Debug.log "The exchange " exchange) == "" then
-        Debug.log "SELECTED TRUE" (Html.option [ (selected True), Html.Attributes.value exchange ] [ Html.text "-- select --" ])
-    else
-        Debug.log "SELECTED false" (Html.option [ (selected False), Html.Attributes.value exchange ] [ Html.text exchange ])
+createOptionsForDDLB : String -> String -> String -> Html msg
+createOptionsForDDLB errorMessage currentlySelectedExchange exchange =
+    if errorMessage /= "" && exchange == currentlySelectedExchange && exchange /= "" then
+        Html.option [ (selected True), Html.Attributes.value exchange ] [ Html.text exchange ]
+    else if exchange == "" then
+        Html.option [ (selected False), Html.Attributes.value exchange ] [ Html.text "-- select --" ]
+    else 
+        Html.option [ (selected False), Html.Attributes.value exchange ] [ Html.text exchange ]
+
+    -- if (Debug.log "The exchange " exchange) == "" then
+    --     Debug.log "SELECTED TRUE" (Html.option [ (selected True), Html.Attributes.value exchange ] [ Html.text "-- select --" ])
+    -- else
+    --     Debug.log "SELECTED false" (Html.option [ (selected False), Html.Attributes.value exchange ] [ Html.text exchange ])
 
 getSignDIV : ArbitrageResponse -> Html Msg
 getSignDIV arbitrageResponse =
@@ -162,14 +169,14 @@ getSignDIV arbitrageResponse =
             [ Html.img [ Html.Attributes.src "/assets/arrowup.gif", Html.Attributes.height 30, Html.Attributes.width 30] []
             , Html.span [] [ Html.text "Bitcoin is beating spot rate by " ]
             , Html.span [] [ Html.text (arbitrageResponse.percentage) ]
-            , Html.button [onClick DetailResponseExpandOrContract ] [ Html.text "Details"]
+--            , Html.button [onClick DetailResponseExpandOrContract ] [ Html.text "Details"]
             ]
     else if (arbitrageResponse.sign == "-") then
         Html.div [class [ TopResult ] ] 
             [ Html.img [ Html.Attributes.src "/assets/arrowdown.gif", Html.Attributes.height 30, Html.Attributes.width 30] []
             , Html.span [] [ Html.text "Bitcoin is losing to spot rate by " ]
             , Html.span [] [ Html.text arbitrageResponse.percentage ]
-            , Html.button [onClick DetailResponseExpandOrContract ] [ Html.text "Details"]
+--            , Html.button [onClick DetailResponseExpandOrContract ] [ Html.text "Details"]
             ]
     else
         Html.div [] []
@@ -184,13 +191,13 @@ showInputForm model =
                         [ Html.div [ class [FormLine] ] 
                             [ Html.span [] [Html.text "Source country: "]
                             -- append an empty country to the beginning of the countriesList (emptyCountry :: model.countriesList)
-                            , Html.select [ on "change" (Json.map SourceCountrySelected targetValue) ] (List.map countryDDLB (emptyCountry :: model.countriesList))
+                            , Html.select [ on "change" (Json.map SourceCountrySelected targetValue) ] (List.map (countryDDLB model.errorMessage (toEmpty model.sourceCountry)) (emptyCountry :: model.countriesList))
                             ]
                         , Html.div [class [FormLine]] [ Html.span [] [Html.text ("Currency: " ++ model.sourceCurrency)] ]
                         , Html.div [class [FormLine]] 
                             [ Html.span [] [Html.text "Exchange: "]
                             , Html.select [ on "change" (Json.map SourceExchangeSelected targetValue) ]
-                              (List.map createOptionsForDDLB (dealWithEmptyList model.sourcePossibleExchanges))
+                              (List.map (createOptionsForDDLB model.errorMessage (toEmpty model.sourceExchange)) (dealWithEmptyList model.sourcePossibleExchanges))
                             ]
                         , Html.div [class [FormLine]] 
                             [ Html.span [] [Html.text "Amount: "]
@@ -206,13 +213,13 @@ showInputForm model =
                     , Html.div [ class [ TargetCountry ] ]
                         [ Html.div [class [FormLine]] 
                             [ Html.span [] [Html.text "Target country: "]
-                            , Html.select [ on "change" (Json.map TargetCountrySelected targetValue) ] (List.map countryDDLB (emptyCountry :: model.countriesList))
+                            , Html.select [ on "change" (Json.map TargetCountrySelected targetValue) ] (List.map (countryDDLB model.errorMessage (toEmpty model.targetCountry)) (emptyCountry :: model.countriesList))
                             ]
                         , Html.div [class [FormLine]] [ Html.span [] [Html.text ("Currency: " ++ model.targetCurrency)] ]
                         , Html.div [class [FormLine]] 
                             [ Html.span [] [Html.text "Exchange: "]
                             , Html.select [ on "change" (Json.map TargetExchangeSelected targetValue) ]
-                                (List.map createOptionsForDDLB (dealWithEmptyList model.targetPossibleExchanges))
+                                (List.map (createOptionsForDDLB model.errorMessage (toEmpty model.targetExchange)) (dealWithEmptyList model.targetPossibleExchanges))
                             ]
                         ]
                     ]
@@ -275,11 +282,17 @@ showSpinner model =
         
         False ->            Html.text ""
 
-countryDDLB : SupportedCountry -> Html Msg
-countryDDLB supportedCountry =
-    if supportedCountry.country == "" then
-        Html.option [ (selected True), Html.Attributes.value supportedCountry.country ] [ Html.text "-- select --" ]
-    else
+countryDDLB : String -> String -> SupportedCountry -> Html Msg
+countryDDLB errorMessage currentlySelectedCountry supportedCountry =
+    -- if supportedCountry.country == "" then
+    --     Html.option [ (selected True), Html.Attributes.value supportedCountry.country ] [ Html.text "-- select --" ]
+    -- else
+    --     Html.option [ (selected False), Html.Attributes.value supportedCountry.country ] [ Html.text supportedCountry.country ]
+    if errorMessage /= "" && supportedCountry.country == currentlySelectedCountry && supportedCountry.country /= "" then
+        Html.option [ (selected True), Html.Attributes.value supportedCountry.country ] [ Html.text supportedCountry.country ]
+    else if supportedCountry.country == "" then
+        Html.option [ (selected False), Html.Attributes.value supportedCountry.country ] [ Html.text "-- select --" ]
+    else 
         Html.option [ (selected False), Html.Attributes.value supportedCountry.country ] [ Html.text supportedCountry.country ]
 
 
@@ -478,7 +491,17 @@ update msg model =
             { model | arbitrageResponse = Nothing, waitingResponse = True, errorMessage = "" } ! [postRequestCommand model]
 
         ClearArbitrageResult ->
-            { model | arbitrageResponse = Nothing } ! []
+            { model | 
+              sourceCountry = Nothing
+            , sourceCurrency = ""
+            , sourceExchange = Nothing
+            , targetCountry = Nothing
+            , targetCurrency = ""
+            , targetExchange = Nothing
+            , amount = "1000.00"
+            , arbitrageResponse = Nothing
+            , waitingResponse = False
+            , errorMessage = "" } ! []
         _ ->
             model ! []
 
