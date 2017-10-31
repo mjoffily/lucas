@@ -29,7 +29,7 @@ function saveExchangeRate(sourceCurrency, targetCurrency, exchangeRate) {
    return new Promise(function (resolve, reject) {
      connect()
      .then(function(db) {
-        db.collection(EXCHANGE_RATES).insertAsync({currencySource:sourceCurrency,currencyTarget: targetCurrency, currencyPair:(sourceCurrency + targetCurrency), exchangeRate: exchangeRate, lastUpdate: (new Date()).toGMTString()})
+        db.collection(EXCHANGE_RATES).insertAsync({currencySource:sourceCurrency,currencyTarget: targetCurrency, currencyPair:(sourceCurrency + targetCurrency), exchangeRate: exchangeRate, lastUpdate: (new Date())})
         .then(function() {
           resolve("ok");
         })
@@ -66,26 +66,26 @@ function saveRequest(query, headers, ipAddress) {
 
 function findExhangeRateWithinTheHour(sourceCurrency, targetCurrency) {
   return new Promise(function (resolve, reject) {
-    console.log("Getting saved exchange rate for currency pair: " + sourceCurrency + targetCurrency);
+    console.log("[findExhangeRateWithinTheHour] - Getting saved exchange rate for currency pair: " + sourceCurrency + targetCurrency);
     connect()
     .then(function(db) {
-        console.log("findExhangeRateWithinTheHour - connect has worked ");
+        console.log("[findExhangeRateWithinTheHour] - connect has worked ");
         return db.collection(EXCHANGE_RATES).find({"currencyPair": sourceCurrency+targetCurrency }).sort({"lastUpdate": -1}).limit(1).toArrayAsync();
     })
     .then(function(items) {
       if (items && items[0])  {
-        //return console.log('these are the itemss: ' + JSON.stringify(items[0]));
+        console.log('[findExhangeRateWithinTheHour] - these are the itemss: ' + JSON.stringify(items[0]));
         console.log(items[0].lastUpdate);
         var currentTimeStr = new Date().toGMTString();
         var timeElapsedInMinutes = (Date.parse(currentTimeStr) - Date.parse(items[0].lastUpdate)) / 1000 / 60;
         if (timeElapsedInMinutes > 60) {
-          console.log("REJECTING CACHED RATE - time elapsed since last rate retrieval: " + timeElapsedInMinutes);
+          console.log("[findExhangeRateWithinTheHour] - REJECTING CACHED RATE - time elapsed since last rate retrieval: " + timeElapsedInMinutes);
           reject({message: "cache expired", code: constants.CACHE_EXPIRED})
         }
         
         resolve({exchangeRate: items[0].exchangeRate, rateAgeInMinutes: timeElapsedInMinutes, retrievedFrom: "cache"});
       } else {
-        console.log("No exchange rate found in cache for " + sourceCurrency + targetCurrency);
+        console.log("[findExhangeRateWithinTheHour] - No exchange rate found in cache for " + sourceCurrency + targetCurrency);
         reject({message: "no exchange rate found", code: constants.NO_EXCHANGE_RATE_FOR_THIS_PAIR})
       }
       return;

@@ -26,39 +26,55 @@ var _user$project$Main$errorMessageDecoder = A2(
 		}
 	},
 	_elm_lang$core$Json_Decode$string);
-var _user$project$Main$countryDDLB = function (supportedCountry) {
-	return _elm_lang$core$Native_Utils.eq(supportedCountry.country, '') ? A2(
-		_elm_lang$html$Html$option,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$selected(true),
-			_1: {
+var _user$project$Main$countryDDLB = F3(
+	function (errorMessage, currentlySelectedCountry, supportedCountry) {
+		return ((!_elm_lang$core$Native_Utils.eq(errorMessage, '')) && (_elm_lang$core$Native_Utils.eq(supportedCountry.country, currentlySelectedCountry) && (!_elm_lang$core$Native_Utils.eq(supportedCountry.country, '')))) ? A2(
+			_elm_lang$html$Html$option,
+			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
-				_1: {ctor: '[]'}
-			}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text('-- select --'),
-			_1: {ctor: '[]'}
-		}) : A2(
-		_elm_lang$html$Html$option,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$selected(false),
-			_1: {
+				_0: _elm_lang$html$Html_Attributes$selected(true),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
+				_0: _elm_lang$html$Html$text(supportedCountry.country),
 				_1: {ctor: '[]'}
-			}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(supportedCountry.country),
-			_1: {ctor: '[]'}
-		});
-};
+			}) : (_elm_lang$core$Native_Utils.eq(supportedCountry.country, '') ? A2(
+			_elm_lang$html$Html$option,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$selected(false),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('-- select --'),
+				_1: {ctor: '[]'}
+			}) : A2(
+			_elm_lang$html$Html$option,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$selected(false),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(supportedCountry.country),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(supportedCountry.country),
+				_1: {ctor: '[]'}
+			}));
+	});
 var _user$project$Main$showSpinner = function (model) {
 	var _p2 = model.waitingResponse;
 	if (_p2 === true) {
@@ -129,13 +145,9 @@ var _user$project$Main$showSpinner = function (model) {
 		return _elm_lang$html$Html$text('');
 	}
 };
-var _user$project$Main$createOptionsForDDLB = function (exchange) {
-	return _elm_lang$core$Native_Utils.eq(
-		A2(_elm_lang$core$Debug$log, 'The exchange ', exchange),
-		'') ? A2(
-		_elm_lang$core$Debug$log,
-		'SELECTED TRUE',
-		A2(
+var _user$project$Main$createOptionsForDDLB = F3(
+	function (errorMessage, currentlySelectedExchange, exchange) {
+		return ((!_elm_lang$core$Native_Utils.eq(errorMessage, '')) && (_elm_lang$core$Native_Utils.eq(exchange, currentlySelectedExchange) && (!_elm_lang$core$Native_Utils.eq(exchange, '')))) ? A2(
 			_elm_lang$html$Html$option,
 			{
 				ctor: '::',
@@ -148,12 +160,24 @@ var _user$project$Main$createOptionsForDDLB = function (exchange) {
 			},
 			{
 				ctor: '::',
+				_0: _elm_lang$html$Html$text(exchange),
+				_1: {ctor: '[]'}
+			}) : (_elm_lang$core$Native_Utils.eq(exchange, '') ? A2(
+			_elm_lang$html$Html$option,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$selected(false),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value(exchange),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
 				_0: _elm_lang$html$Html$text('-- select --'),
 				_1: {ctor: '[]'}
-			})) : A2(
-		_elm_lang$core$Debug$log,
-		'SELECTED false',
-		A2(
+			}) : A2(
 			_elm_lang$html$Html$option,
 			{
 				ctor: '::',
@@ -169,7 +193,7 @@ var _user$project$Main$createOptionsForDDLB = function (exchange) {
 				_0: _elm_lang$html$Html$text(exchange),
 				_1: {ctor: '[]'}
 			}));
-};
+	});
 var _user$project$Main$concatSymbolAndName = function (countryRecord) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
@@ -1312,7 +1336,10 @@ var _user$project$Main$showInputForm = function (model) {
 										},
 										A2(
 											_elm_lang$core$List$map,
-											_user$project$Main$countryDDLB,
+											A2(
+												_user$project$Main$countryDDLB,
+												model.errorMessage,
+												_user$project$Main$toEmpty(model.sourceCountry)),
 											{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
 									_1: {ctor: '[]'}
 								}
@@ -1382,7 +1409,10 @@ var _user$project$Main$showInputForm = function (model) {
 												},
 												A2(
 													_elm_lang$core$List$map,
-													_user$project$Main$createOptionsForDDLB,
+													A2(
+														_user$project$Main$createOptionsForDDLB,
+														model.errorMessage,
+														_user$project$Main$toEmpty(model.sourceExchange)),
 													_user$project$Main$dealWithEmptyList(model.sourcePossibleExchanges))),
 											_1: {ctor: '[]'}
 										}
@@ -1493,7 +1523,10 @@ var _user$project$Main$showInputForm = function (model) {
 											},
 											A2(
 												_elm_lang$core$List$map,
-												_user$project$Main$countryDDLB,
+												A2(
+													_user$project$Main$countryDDLB,
+													model.errorMessage,
+													_user$project$Main$toEmpty(model.targetCountry)),
 												{ctor: '::', _0: _user$project$Main$emptyCountry, _1: model.countriesList})),
 										_1: {ctor: '[]'}
 									}
@@ -1563,7 +1596,10 @@ var _user$project$Main$showInputForm = function (model) {
 													},
 													A2(
 														_elm_lang$core$List$map,
-														_user$project$Main$createOptionsForDDLB,
+														A2(
+															_user$project$Main$createOptionsForDDLB,
+															model.errorMessage,
+															_user$project$Main$toEmpty(model.targetExchange)),
 														_user$project$Main$dealWithEmptyList(model.targetPossibleExchanges))),
 												_1: {ctor: '[]'}
 											}
@@ -1829,7 +1865,7 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{arbitrageResponse: _elm_lang$core$Maybe$Nothing}),
+						{sourceCountry: _elm_lang$core$Maybe$Nothing, sourceCurrency: '', sourceExchange: _elm_lang$core$Maybe$Nothing, targetCountry: _elm_lang$core$Maybe$Nothing, targetCurrency: '', targetExchange: _elm_lang$core$Maybe$Nothing, amount: '1000.00', arbitrageResponse: _elm_lang$core$Maybe$Nothing, waitingResponse: false, errorMessage: ''}),
 					{ctor: '[]'});
 			default:
 				return A2(
