@@ -12,6 +12,7 @@ const EXCHANGES = { "Foxbit": exchgFoxBit
                   , "Coins.ph": exchgCoinsPH
                   , "Coins.ph (THB)": exchgCoinsTHB
                   , "Coinbase": exchgCoinbaseUSD
+                  , "Bitfinex": exchgBitfinexUSD
                   , "luno": exchgLunoZAR
                   , "UrduBit": exchgUrduBitPKR
                   , "VBTC": exchgVBTC
@@ -180,6 +181,19 @@ function exchgLunoZAR(callback) {
         axios.get(uri).then(res => {
             console.log('Response from Luno: ' + res.data);
             resolve({'currentHighestBidPrice': res.data.bid, 'currentLowestOfferPrice': res.data.ask});
+          })
+        .catch(error => {
+          reject(new Error(error));
+        });
+    })
+}
+
+function exchgBitfinexUSD() {
+    return new Promise(function (resolve, reject) {
+        var uri = 'https://api.bitfinex.com/v2/ticker/tBTCUSD';
+        axios.get(uri).then(res => {
+            console.log('Response from Bitfinex: ' + JSON.stringify(res.data));
+            resolve({'currentHighestBidPrice': res.data[2], 'currentLowestOfferPrice': res.data[0]});
           })
         .catch(error => {
           reject(new Error(error));
