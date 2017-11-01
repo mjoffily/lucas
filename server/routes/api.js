@@ -22,7 +22,7 @@ const COUNTRIES = {'Australia': {'country': 'Australia', 'currencySymbol': 'AUD'
                    'Russia': {'country':'Russia', 'currencySymbol':'RUB', 'name': 'Russian Ruble', 'exchanges':['BTC-e']},
                    'South Africa': {'country':'South Africa', 'currencySymbol':'ZAR', 'name': 'South African Rand', 'exchanges':['luno']},
                    'Thailand': {'country':'Thailand', 'currencySymbol':'THB', 'name': 'Thailand Baht', 'exchanges':['Coins.ph (THB)']},
-                   'United States': {'country':'United States', 'currencySymbol':'USD', 'name': 'American dolar', 'exchanges':['Coinbase']},
+                   'United States': {'country':'United States', 'currencySymbol':'USD', 'name': 'American dolar', 'exchanges':['Coinbase', 'Bitfinex']},
                    'Venezuela': {'country':'Venezuela', 'currencySymbol':'VEF', 'name': 'Venezuelan Bolivar', 'exchanges':['SurBitcoin']},
                    'Vietnam': {'country':'Vietnam', 'currencySymbol':'VND', 'name': 'Vietnamise Dongs', 'exchanges':['VBTC']}
                 };
@@ -31,7 +31,7 @@ const COUNTRIES = {'Australia': {'country': 'Australia', 'currencySymbol': 'AUD'
 const API = 'https://angular2test-mjoffily.c9users.io:8080';
 /* GET api listing. */
 
-console.log = function() {}
+//console.log = function() {}
 
 
 function isSupportedCountry(country, callback) {
